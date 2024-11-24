@@ -1,5 +1,7 @@
 import Link from "next/link";
 import styles from './ui/home.module.css';
+import { projects } from './lib/placeholder-data';
+import { Project } from "./lib/definitions";
 
 
 export default function Home() {
@@ -28,11 +30,6 @@ export default function Home() {
 }
 
 function ProjectsContainer() {
-
-  const projects = [
-    { title: '井字棋游戏', desc: '本项目来自于 React 官方快速入门教程：井字棋游戏。', href: '/game-ttt' },
-  ];
-
   return (
     <div className={styles.projectsPanel}>
       {projects.map((project, index) => (
@@ -42,11 +39,11 @@ function ProjectsContainer() {
   );
 }
 
-function ProjectCard({ title, desc, href }: { title: string; desc: string, href: string }) {
+function ProjectCard(project: Project) {
   return (
-    <Link href={href} className={styles.projectCard}>
-      <h2 className="text-lg font-semibold text-gray-100">{title}</h2>
-      <p className="mt-2 text-gray-400">{desc}</p>
+    <Link href={project.href} className={styles.projectCard}>
+      <h2 className="text-lg font-semibold text-gray-100">{project.name}</h2>
+      <p className="mt-2 text-gray-400">{project.desc}</p>
     </Link>
   );
 }
