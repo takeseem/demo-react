@@ -1,0 +1,25 @@
+:root {
+  --project-bg-color1: #2a0b4b;
+  --vp-t-color: .3s ease;
+  --vp-t-transform: .3s ease;
+}
+
+.projectsPanel {
+  /* border: 1px solid white; */
+  display: flex;
+  justify-content: center;
+}
+
+.projectCard {
+  /* border: 1px solid red; */
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: var(--project-bg-color1);
+  transition: background var(--vp-t-color),transform var(--vp-t-transform);
+}
+
+.projectCard:hover {
+  background: #431277;
+  transform: scale(.98);
+}
