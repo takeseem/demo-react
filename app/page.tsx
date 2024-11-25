@@ -2,6 +2,8 @@ import Link from "next/link";
 import styles from './ui/home.module.css';
 import { projects } from './lib/placeholder-data';
 import { Project } from "./lib/definitions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function Home() {
@@ -12,6 +14,10 @@ export default function Home() {
     <div className="app">
       <header className="app-header">
         <h1>Demo React</h1>
+        <Link href="../" className="app-back">
+          <FontAwesomeIcon icon={faHouse} />
+          TAKESEEM
+        </Link>
       </header>
       <main className="app-main">
         <ProjectsContainer />
