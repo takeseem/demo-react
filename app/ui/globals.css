@@ -6,6 +6,9 @@
   --background: #ffffff;
   --foreground: #171717;
   --bg-gray-50: rgb(27, 29, 30);
+  --vp-t-color: .3s ease;
+  --vp-t-transform: .3s ease;
+  --project-bg-color1: #2a0b4b;
 }
 
 @media (prefers-color-scheme: dark) {
