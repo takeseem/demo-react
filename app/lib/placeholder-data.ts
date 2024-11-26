@@ -3,6 +3,9 @@ import { Project } from "./definitions";
 
 const myBlog = "https://www.takeseem.com";
 const myRepo = "https://github.com/takeseem/demo-react";
+const myRepoMain = myRepo + "/tree/main";
+const myRepoCommitMain = myRepo + "/commits/main";
+const myRepoBlameMain = myRepo + "/blame/main";
 
 const gameTtt: Project = {
   id: 'game-ttt',
@@ -24,4 +27,4 @@ const projects: Project[] = [
   gameTtt, reactThink
 ];
 
-export { myBlog, myRepo, projects, gameTtt, reactThink };
+export { myBlog, myRepo, myRepoMain, myRepoCommitMain, myRepoBlameMain, projects, gameTtt, reactThink };
