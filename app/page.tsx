@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from './ui/home.module.css';
-import { projects } from './lib/placeholder-data';
+import { myRepo, projects } from './lib/placeholder-data';
 import { Project } from "./lib/definitions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
@@ -28,7 +28,7 @@ export default function Home() {
             基于 <a href="https://nextjs.org">Next.js</a> 和 <a href="https://tailwindcss.com">Tailwind CSS</a> 构建
           </span>
           <span>
-            <a href="https://github.com/takeseem/demo-react">GitHub</a>
+            <a href={myRepo} target="_blank">GitHub</a>
           </span>
       </footer>
     </div>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { projects } from "../../lib/placeholder-data";
+import { myRepo, projects } from "../../lib/placeholder-data";
 import styles from "./demo.module.css";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -28,7 +28,7 @@ export default function SideNav() {
       <NavLinks />
       <div className="grow"/>
       <div>
-        <Link href="https://github.com/takeseem/demo-react" className={styles.navLink}>
+        <Link href={myRepo} className={styles.navLink} target="_blank">
           <FontAwesomeIcon icon={faGithub} className="rotate-[15deg]" /> demo-react
         </Link>
         <div/>

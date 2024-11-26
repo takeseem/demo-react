@@ -1,6 +1,8 @@
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faHashtag } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "./definitions";
 
+const myBlog = "https://www.takeseem.com";
+const myRepo = "https://github.com/takeseem/demo-react";
 
 const gameTtt: Project = {
   id: 'game-ttt',
@@ -10,8 +12,16 @@ const gameTtt: Project = {
   icon: faHashtag,
 };
 
+const reactThink: Project = {
+  id:'react-think',
+  name: 'React 哲学',
+  desc: '本项目来自于 React 官方文档：React 哲学。',
+  href: '/demo/react-think',
+  icon: faBrain,
+};
+
 const projects: Project[] = [
-  gameTtt,
+  gameTtt, reactThink
 ];
 
-export { projects, gameTtt };
+export { myBlog, myRepo, projects, gameTtt, reactThink };
