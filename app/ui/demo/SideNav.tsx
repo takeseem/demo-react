@@ -7,6 +7,7 @@ import { projects } from "../../lib/placeholder-data";
 import styles from "./demo.module.css";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 export default function SideNav() {
   const pathname = usePathname();
@@ -25,6 +26,13 @@ export default function SideNav() {
         <p>Demo React</p>
       </Link>
       <NavLinks />
+      <div className="grow"/>
+      <div>
+        <Link href="https://github.com/takeseem/demo-react" className={styles.navLink}>
+          <FontAwesomeIcon icon={faGithub} className="rotate-[15deg]" /> demo-react
+        </Link>
+        <div/>
+      </div>
     </div>
   );
 }

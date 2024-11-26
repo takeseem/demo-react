@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import styles from '../../ui/demo/game-ttt/game-ttt.module.css'
+import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faReact } from '@fortawesome/free-brands-svg-icons';
 
 export default function Page() {
   const [squares, setSquares] = useState<string[]>(Array(9).fill(null));
@@ -44,13 +47,23 @@ export default function Page() {
   };
 
   return (
-    <main className={styles.main}>
-      <div>
-        <div className='text-2xl'>井字棋游戏</div>
-        <div>{status}</div>
-        <Board squares={squares} handleClick={handleClick}/>
+    <main>
+      <div className={styles.main}>
+        <div>
+          <div className='text-2xl'>井字棋游戏</div>
+          <div>{status}</div>
+          <Board squares={squares} handleClick={handleClick}/>
+        </div>
+        <History records={historyRecords} onJump={onJump}/>
       </div>
-      <History records={historyRecords} onJump={onJump}/>
+      <div className='p-4'>
+        <Link href="https://zh-hans.react.dev/learn/tutorial-tic-tac-toe">
+          <FontAwesomeIcon icon={faReact} className="rotate-[15deg]" /> 教程：井字棋游戏
+        </Link>
+        <div className="p-4 max-w-md">
+          本教程将引导你逐步实现一个简单的井字棋游戏，并且不需要你对 React 有任何了解。在此过程中你会学习到一些编写 React 程序的基本知识，完全理解它们可以让你对 React 有比较深入的理解。
+        </div>
+      </div>      
     </main>
   );
 }
