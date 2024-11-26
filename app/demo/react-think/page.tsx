@@ -4,6 +4,7 @@ import { faBrain } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
+
 export default function Page() {
   return (
     <main>
@@ -13,11 +14,29 @@ export default function Page() {
   );
 }
 
+type Product = {
+  name: string;
+  category: string;
+  price: string;
+  stocked: boolean;
+};
+
+const products: Product[] = [
+  {category: "Fruits", price: "$1", stocked: true, name: "Apple"},
+  {category: "Fruits", price: "$1", stocked: true, name: "Dragonfruit"},
+  {category: "Fruits", price: "$2", stocked: false, name: "Passionfruit"},
+  {category: "Vegetables", price: "$2", stocked: true, name: "Spinach"},
+  {category: "Vegetables", price: "$4", stocked: false, name: "Pumpkin"},
+  {category: "Vegetables", price: "$1", stocked: true, name: "Peas"}
+];
+
+
 function ProductPanel() {
+  const filteredProducts = products;
   return (
-    <div>
+    <div style={{ padding: "1rem" }}>
       <SearchBar />
-      <ProductTable />
+      <ProductTable products={filteredProducts} />
     </div>
   );
 }
@@ -32,33 +51,52 @@ function SearchBar() {
   );
 }
 
-function ProductTable() {
+function ProductTable({ products }: { products: Product[] }) {
+  // products 根据 category 分类形成新的数据结构
+  const categories: { [key: string]: Product[] } = {};
+  products.forEach(v => {
+    let list = categories[v.category];
+    if (!list) {
+      list = [];
+      categories[v.category] = list;
+    }
+    list.push(v);
+  });
+
   return (
     <div>
       <table>
-        <thead><tr><th>Name</th><th>Price</th></tr></thead>
+        <thead><tr><th style={{ width: "80%" }}>Name</th><th>Price</th></tr></thead>
         <tbody>
-          <ProductCategoryRow />
+          {Object.entries(categories).map(([category, list]) => (
+              <ProductCategoryRow key={category} category={category} products={list} />
+          ))}
         </tbody>
       </table>
     </div>
   );
 }
 
-function ProductCategoryRow() {
+function ProductCategoryRow({ category, products }: { category: string, products: Product[] }) {
   return (
     <>
       <tr>
-        <td colSpan={2}>category name</td>
+        <th colSpan={2}>{category}</th>
       </tr>
-      <ProductRow />
+      {products.map(v => (
+        <ProductRow key={v.name} product={v} />
+      ))}
     </>
   );
 }
-function ProductRow() {
+
+function ProductRow({ product }: { product: Product }) {
   return (
     <tr>
-      <td>name</td><td>price</td>
+      <td>
+        <p style={ product.stocked ? {} : { color: 'red' } }>{product.name}</p>
+      </td>
+      <td>{product.price}</td>
     </tr>
   );
 }
