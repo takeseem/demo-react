@@ -129,7 +129,7 @@ function PageInfo() {
   const pagePath = "/app/demo/react-think/page.tsx";
   return (
     <div className='p-4'>
-      <Link href={`${myBlog}/code/fe/react/react-zx.html`} target="_blank">
+      <Link href={`${myBlog}/code/fe/react/react-think.html`} target="_blank">
         <FontAwesomeIcon icon={faBrain} className="rotate-[15deg]" /> React 哲学
       </Link>
       <div className="p-4 max-w-md">
