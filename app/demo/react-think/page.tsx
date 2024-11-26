@@ -1,8 +1,11 @@
+'use client';
+
 import { myBlog } from "@/app/lib/placeholder-data";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faBrain } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import { useState } from "react";
 
 
 export default function Page() {
@@ -32,19 +35,33 @@ const products: Product[] = [
 
 
 function ProductPanel() {
-  const filteredProducts = products;
+  const [searchTxt, setSearchTxt] = useState("");
+  const [onlyStock, setOnlyStock] = useState(false);
+  
+  const filteredProducts = products.filter(v => {
+    if (searchTxt && !v.name.toLowerCase().includes(searchTxt)) return false;
+    if (onlyStock && !v.stocked) return false;
+    return true;
+  });
+
   return (
     <div style={{ padding: "1rem" }}>
-      <SearchBar />
+      <SearchBar searchTxt={searchTxt} handleSearchTxt={setSearchTxt} />
       <ProductTable products={filteredProducts} />
     </div>
   );
 }
 
-function SearchBar() {
+function SearchBar({ searchTxt, handleSearchTxt, }: {
+  searchTxt: string;
+  handleSearchTxt: (txt: string) => void;
+}) {
   return (
     <div>
-      <input type="text" placeholder="Search..." />
+      <input type="text" placeholder="Search..."
+        style={{ padding: "0 0.5rem", backgroundColor: "gray"  }}
+        value={searchTxt} onChange={e => handleSearchTxt(e.target.value)}
+      />
       <br />
       <input type="checkbox" /> Only show products in stock
     </div>
