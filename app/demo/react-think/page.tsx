@@ -25,7 +25,9 @@ function ProductPanel() {
 function SearchBar() {
   return (
     <div>
-      SearchBar
+      <input type="text" placeholder="Search..." />
+      <br />
+      <input type="checkbox" /> Only show products in stock
     </div>
   );
 }
@@ -33,25 +35,31 @@ function SearchBar() {
 function ProductTable() {
   return (
     <div>
-      Name, Price
-      <ProductCategoryRow />
+      <table>
+        <thead><tr><th>Name</th><th>Price</th></tr></thead>
+        <tbody>
+          <ProductCategoryRow />
+        </tbody>
+      </table>
     </div>
   );
 }
 
 function ProductCategoryRow() {
   return (
-    <div>
-      category name
+    <>
+      <tr>
+        <td colSpan={2}>category name</td>
+      </tr>
       <ProductRow />
-    </div>
+    </>
   );
 }
 function ProductRow() {
   return (
-    <div>
-      name, price
-    </div>
+    <tr>
+      <td>name</td><td>price</td>
+    </tr>
   );
 }
 
