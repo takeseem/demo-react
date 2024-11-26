@@ -37,7 +37,7 @@ const products: Product[] = [
 function ProductPanel() {
   const [searchTxt, setSearchTxt] = useState("");
   const [onlyStock, setOnlyStock] = useState(false);
-  
+
   const filteredProducts = products.filter(v => {
     if (searchTxt && !v.name.toLowerCase().includes(searchTxt)) return false;
     if (onlyStock && !v.stocked) return false;
@@ -46,15 +46,19 @@ function ProductPanel() {
 
   return (
     <div style={{ padding: "1rem" }}>
-      <SearchBar searchTxt={searchTxt} handleSearchTxt={setSearchTxt} />
+      <SearchBar searchTxt={searchTxt} handleSearchTxt={setSearchTxt}
+        onlyStock={onlyStock} handleOnlyStock={setOnlyStock}
+      />
       <ProductTable products={filteredProducts} />
     </div>
   );
 }
 
-function SearchBar({ searchTxt, handleSearchTxt, }: {
+function SearchBar({ searchTxt, handleSearchTxt, onlyStock, handleOnlyStock }: {
   searchTxt: string;
   handleSearchTxt: (txt: string) => void;
+  onlyStock: boolean;
+  handleOnlyStock: (checked: boolean) => void;
 }) {
   return (
     <div>
@@ -63,7 +67,10 @@ function SearchBar({ searchTxt, handleSearchTxt, }: {
         value={searchTxt} onChange={e => handleSearchTxt(e.target.value)}
       />
       <br />
-      <input type="checkbox" /> Only show products in stock
+      <label>
+        <input type="checkbox" checked={onlyStock} onChange={e => handleOnlyStock(e.target.checked)} />
+        {' '}Only show products in stock
+      </label>
     </div>
   );
 }
