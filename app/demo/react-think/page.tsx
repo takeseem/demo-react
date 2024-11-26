@@ -1,6 +1,6 @@
 'use client';
 
-import { myBlog, myRepo, myRepoBlameMain, myRepoCommitMain, myRepoMain } from "@/app/lib/placeholder-data";
+import { myBlog, myRepoBlameMain, myRepoCommitMain, myRepoMain } from "@/app/lib/placeholder-data";
 import { faGithub, faRev } from "@fortawesome/free-brands-svg-icons";
 import { faBrain, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
