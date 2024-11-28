@@ -10,6 +10,7 @@
   margin: 0.5rem;
   padding: 1rem;
   border-radius: 0.5rem;
+  flex: 0 1 20rem;
   background: var(--project-bg-color1);
   transition: background var(--vp-t-color),transform var(--vp-t-transform);
 }

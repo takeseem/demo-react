@@ -6,4 +6,6 @@ export type Project = {
   desc: string;
   href: string;
   icon: IconProp;
+  pagePath: string;
+  link: string;
 }

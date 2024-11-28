@@ -1,17 +1,14 @@
 'use client';
 
-import { myBlog, myRepoBlameMain, myRepoCommitMain, myRepoMain } from "@/app/lib/placeholder-data";
-import { faGithub, faRev } from "@fortawesome/free-brands-svg-icons";
-import { faBrain, faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
+import { reactThink } from "@/app/lib/placeholder-data";
+import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import { useState } from "react";
 
 
 export default function Page() {
   return (
     <main>
-      <PageInfo />
+      <ProjectPageInfo project={reactThink} />
       <ProductPanel />
     </main>
   );
@@ -122,37 +119,5 @@ function ProductRow({ product }: { product: Product }) {
       </td>
       <td>{product.price}</td>
     </tr>
-  );
-}
-
-function PageInfo() {
-  const pagePath = "/app/demo/react-think/page.tsx";
-  return (
-    <div className='p-4'>
-      <Link href={`${myBlog}/code/fe/react/react-think.html`} target="_blank">
-        <FontAwesomeIcon icon={faBrain} className="rotate-[15deg]" /> React 哲学
-      </Link>
-      <div className="p-4 max-w-md">
-        怎样使用 React 构建界面组件？
-        <div>
-          <Link href={myRepoMain + pagePath} target="_blank">
-            <FontAwesomeIcon icon={faGithub}/>
-            {' '}源码：<code>{pagePath}</code>
-          </Link>
-        </div>
-        <div>
-          <Link href={myRepoBlameMain + pagePath} target="_blank">
-            <FontAwesomeIcon icon={faRev} />
-            {' '}Blame
-          </Link>
-        </div>
-        <div>
-          <Link href={myRepoCommitMain + pagePath} target="_blank">
-            <FontAwesomeIcon icon={faClockRotateLeft} />
-            {' '}提交记录
-          </Link>
-        </div>
-      </div>
-    </div>
   );
 }
