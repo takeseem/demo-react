@@ -1,5 +1,6 @@
 import { faBrain, faHashtag, faT } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "./definitions";
+import { faUikit } from "@fortawesome/free-brands-svg-icons";
 
 const myBlog = "https://www.takeseem.com";
 const myRepo = "https://github.com/takeseem/demo-react";
@@ -37,11 +38,21 @@ const reactTypeScript: Project = {
   link: "https://zh-hans.react.dev/learn/typescript",
 };
 
+const reactJsx: Project = {
+  id: 'react-jsx',
+  name: '描述 UI',
+  desc: 'React 是一个用于构建用户界面（UI）的 JavaScript 库，用户界面由按钮、文本和图像等小单元内容构建而成。React 帮助你把它们组合成可重用、可嵌套的 组件。从 web 端网站到移动端应用，屏幕上的所有内容都可以被分解成组件。在本章节中，你将学习如何创建、定制以及有条件地显示 React 组件。',
+  href: '/demo/react-jsx',
+  icon: faUikit,
+  pagePath: "/app/demo/react-jsx/page.tsx",
+  link: "https://zh-hans.react.dev/learn/describing-the-ui",
+};
+
 const projects: Project[] = [
-  gameTtt, reactThink, reactTypeScript,
+  gameTtt, reactThink, reactTypeScript, reactJsx,
 ];
 
 export {
   myBlog, myRepo, myRepoMain, myRepoCommitMain, myRepoBlameMain,
-  projects, gameTtt, reactThink, reactTypeScript,
+  projects, gameTtt, reactThink, reactTypeScript, reactJsx,
  };

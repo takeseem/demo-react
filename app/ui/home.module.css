@@ -3,6 +3,7 @@
   /* border: 1px solid white; */
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .projectCard {
