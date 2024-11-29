@@ -10,13 +10,20 @@ export default function Page() {
     <>
       <div>
         <div>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", }}>第一个组件</h1>
           <Gallery />
         </div>
         <div>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", }}>TodoList</h1>
           <TodoList />
         </div>
         <div>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", }}>将 Props 传递给组件</h1>
           <Profile2 />
+        </div>
+        <div>
+          <h1 style={{ fontSize: "1.5rem", fontWeight: "bold", }}>条件渲染</h1>
+          <PackingList />
         </div>
       </div>
       <hr style={{ margin: "1rem 0 0", }}/>
@@ -24,6 +31,28 @@ export default function Page() {
         <ProjectPageInfo project={reactJsx} />
       </main>
     </>
+  );
+}
+
+function PackingList() {
+  return (
+    <section>
+      <h1>Sally Ride&apos;s Packing List</h1>
+      <ul>
+        <Item name="Space Suit" packed={true} />
+        <Item name="Helmet with a Golden Leaf" packed={true} />
+        <Item name="Photo of Tam" packed={false} />
+      </ul>
+    </section>
+  );
+}
+function Item({ name, packed }: { name: string, packed: boolean }) {
+  return (
+    <li>
+      <span>{name}</span>
+      {' '}
+      <span>{packed ? '✅' : '❌'}</span>
+    </li>
   );
 }
 
