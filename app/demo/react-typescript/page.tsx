@@ -2,6 +2,7 @@
 
 import { reactTypeScript } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
+import { useReducer } from "react";
 
 
 export default function Page() {
@@ -11,6 +12,9 @@ export default function Page() {
         <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
           <Abutton />
           <Abutton2 />
+        </div>
+        <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
+          <UseReducerDemo />
         </div>
       </div>
       <hr style={{ margin: "1rem 0 0", }}/>
@@ -26,6 +30,39 @@ const btnStyle = {
   borderRadius: "0.5rem",
   padding: "0.5rem"
 };
+
+function UseReducerDemo() {
+  interface State {
+    count: number,
+  }
+  const state0 = { count: 0 };
+  type Action = | { type: "reset" } | { type: "add", value: number };
+
+  function reducer(state: State, action: Action): State {
+    switch (action.type) {
+      case "reset":
+        return state0;
+      case "add":
+        return { ...state, count: state.count + action.value };
+      default:
+        throw new Error(`Unknown action: ${action}`);
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, state0);
+  
+  return (
+    <div>
+      <h1>useReducer demo</h1>
+      计数：<text>{state.count}</text>
+      <div>
+        <button style={btnStyle} onClick={() => dispatch({ type: "add", value: 1, })}>加 1</button>
+        <button style={btnStyle} onClick={() => dispatch({ type: "add", value: 5, })}>加 5</button>
+        <button style={btnStyle} onClick={() => dispatch( { type: "reset", })}>重置</button>
+      </div>
+    </div>
+  );
+}
 
 function Abutton2() {
   return (
