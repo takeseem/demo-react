@@ -7,7 +7,9 @@ import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
   return (
-    <>
+    <main>
+      <ProjectPageInfo project={reactJsx} />
+      <hr style={{ margin: "0 0 1rem", }}/>
       <div>
         <div>
           <h1 style={h1Style}>第一个组件</h1>
@@ -30,11 +32,7 @@ export default function Page() {
           <PeopleList />
         </div>
       </div>
-      <hr style={{ margin: "1rem 0 0", }}/>
-      <main>
-        <ProjectPageInfo project={reactJsx} />
-      </main>
-    </>
+    </main>
   );
 }
 

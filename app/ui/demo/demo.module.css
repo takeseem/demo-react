@@ -9,6 +9,7 @@
 .demoMain {
   /* border: 1px solid purple; */
   flex: 8;
+  overflow: auto;
 }
 
 .sideNav {
