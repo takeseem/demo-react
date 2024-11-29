@@ -99,7 +99,7 @@ function UseReducerDemo() {
   return (
     <div>
       <h1>useReducer demo</h1>
-      计数：<text>{state.count}</text>
+      计数：{state.count}
       <div>
         <button style={btnStyle} onClick={() => dispatch({ type: "add", value: 1, })}>加 1</button>
         <button style={btnStyle} onClick={() => dispatch({ type: "add", value: 5, })}>加 5</button>
