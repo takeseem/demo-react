@@ -12,11 +12,28 @@ export default function Page() {
         <div>
           <Gallery />
         </div>
+        <div>
+          <TodoList />
+        </div>
       </div>
       <hr style={{ margin: "1rem 0 0", }}/>
       <main>
         <ProjectPageInfo project={reactJsx} />
       </main>
+    </>
+  );
+}
+
+function TodoList() {
+  return (
+    <>
+      <h1>Hedy Lamarr&apos;s Todos</h1>
+      <img src="https://i.imgur.com/yXOvdOSs.jpg" alt="Hedy Lamarr" />
+      <ul>
+        <li>Invent new traffic lights</li>
+        <li>Rehearse a movie scene</li>
+        <li>Improve spectrum technology</li>
+      </ul>
     </>
   );
 }
