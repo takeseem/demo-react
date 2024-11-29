@@ -2,7 +2,7 @@
 
 import { reactTypeScript } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import { createContext, useContext, useReducer, useState } from "react";
+import { createContext, useCallback, useContext, useReducer, useState } from "react";
 
 
 export default function Page() {
@@ -19,6 +19,9 @@ export default function Page() {
         <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
           <UseContextDemo />
         </div>
+        <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
+          <UseCallbackDemo />
+        </div>
       </div>
       <hr style={{ margin: "1rem 0 0", }}/>
       <main>
@@ -28,6 +31,22 @@ export default function Page() {
   );
 }
 
+const inputStyle = {
+  background: "gray",
+};
+
+function UseCallbackDemo() {
+  const [value, setValue] = useState("init value");
+  const handleChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(e => {
+    setValue(e.target.value);
+  }, [setValue]);
+  return (
+    <>
+      <input value={value} style={inputStyle} onChange={handleChange} />
+      <p>值：{value}</p>
+    </>
+  );
+}
 
 type Theme = "light" | "dark" | "system";
 const ThemeContext = createContext<Theme>("dark");
