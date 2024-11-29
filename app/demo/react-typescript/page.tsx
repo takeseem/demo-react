@@ -2,7 +2,7 @@
 
 import { reactTypeScript } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import { useReducer } from "react";
+import { createContext, useContext, useReducer, useState } from "react";
 
 
 export default function Page() {
@@ -16,6 +16,9 @@ export default function Page() {
         <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
           <UseReducerDemo />
         </div>
+        <div style={{ display: "flex", gap: "1rem", padding: "0.5rem", }}>
+          <UseContextDemo />
+        </div>
       </div>
       <hr style={{ margin: "1rem 0 0", }}/>
       <main>
@@ -24,6 +27,29 @@ export default function Page() {
     </>
   );
 }
+
+
+type Theme = "light" | "dark" | "system";
+const ThemeContext = createContext<Theme>("dark");
+const useGetTheme = () => useContext(ThemeContext);
+function UseContextDemo() {
+  const [theme, ] = useState<Theme>("dark");
+  return (
+    <ThemeContext.Provider value={theme}>
+      <MyUseContextComponent />
+    </ThemeContext.Provider>
+  );
+}
+function MyUseContextComponent() {
+  const theme = useGetTheme();
+  return (
+    <div>
+      <h1>useContext demo</h1>
+      当前主题：{theme}
+    </div>
+  );
+}
+
 
 const btnStyle = {
   border: "1px solid gray",
