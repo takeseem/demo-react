@@ -45,7 +45,7 @@ const reactJsx: Project = {
   href: '/demo/react-jsx',
   icon: faUikit,
   pagePath: "/app/demo/react-jsx/page.tsx",
-  link: "https://zh-hans.react.dev/learn/describing-the-ui",
+  link: `${myBlog}/code/fe/react/react-learn-01-ui.html`,
 };
 
 const projects: Project[] = [
