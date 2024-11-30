@@ -1,4 +1,4 @@
-import { faBrain, faHashtag, faT } from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faHandshake, faHashtag, faT } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "./definitions";
 import { faUikit } from "@fortawesome/free-brands-svg-icons";
 
@@ -48,11 +48,21 @@ const reactJsx: Project = {
   link: `${myBlog}/code/fe/react/react-learn-01-ui.html`,
 };
 
+const reactAddInter: Project = {
+  id: 'react-add-inter',
+  name: 'React 交互',
+  desc: '界面上的控件会根据用户的输入而更新。例如，点击按钮切换轮播图的展示。在 React 中，随时间变化的数据被称为状态（state）。你可以向任何组件添加状态，并按需进行更新。在本章节中，你将学习如何编写处理交互的组件，更新它们的状态，并根据时间变化显示不同的效果。',
+  href: '/demo/react-add-inter',
+  icon: faHandshake,
+  pagePath: "/app/demo/react-add-inter/page.tsx",
+  link: `${myBlog}/code/fe/react/react-learn-02-add-inter.html`,
+};
+
 const projects: Project[] = [
-  gameTtt, reactThink, reactTypeScript, reactJsx,
+  gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter,
 ];
 
 export {
   myBlog, myRepo, myRepoMain, myRepoCommitMain, myRepoBlameMain,
-  projects, gameTtt, reactThink, reactTypeScript, reactJsx,
+  projects, gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter,
  };
