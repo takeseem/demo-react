@@ -47,7 +47,7 @@ export default function Page() {
 function DemoStateInc() {
   const [score, setScore] = useState(0);
   function inc() {
-    setScore(score + 1);
+    setScore(v => v + 1);
   }
   return (
     <>
