@@ -16,5 +16,8 @@ const btnStyle = {
   borderRadius: "0.5rem",
   padding: "0.5rem"
 };
+const bgStyle = {
+  backgroundColor: "gray",
+}
 
-export { h1Style, btnStyle };
+export { h1Style, btnStyle, bgStyle, };

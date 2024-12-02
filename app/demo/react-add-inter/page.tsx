@@ -1,10 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { btnStyle, h1Style } from "@/app/lib/definitions";
+import { bgStyle, btnStyle, h1Style } from "@/app/lib/definitions";
 import { reactAddInter } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 
 export default function Page() {
   return (
@@ -22,8 +22,44 @@ export default function Page() {
           <h1 style={h1Style}>State：组件的状态</h1>
           <DemoState />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>渲染和提交</h1>
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>state 如同一张快照</h1>
+          <DemoSend />
+        </div>
       </div>
     </main>
+  );
+}
+
+function DemoSend() {
+  const [to, setTo] = useState("Alice");
+  const [msg, setMsg] = useState("Hello");
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setTimeout(() => {
+      alert(`Yor said ${msg} to ${to}.`);
+    }, 5000);
+  }
+  return (
+    <form style={{ padding: "1rem", }} onSubmit={handleSubmit}>
+      To:&nbsp;
+      <select style={bgStyle} value={to} onChange={e => setTo(e.target.value)}>
+        <option value="Alice">Alice</option>
+        <option value="Bob">Bob</option>
+      </select>
+      <br />
+      <textarea style={bgStyle} placeholder="Message..."
+        value={msg} onChange={e => setMsg(e.target.value)} />
+      <br/>
+      <button style={btnStyle} type="submit">Send</button> 5 秒后发送，但内容是发送时的状态数据。
+    </form>
   );
 }
 
