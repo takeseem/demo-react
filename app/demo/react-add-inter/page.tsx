@@ -4,7 +4,7 @@
 import { btnStyle, h1Style } from "@/app/lib/definitions";
 import { reactAddInter } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 
 export default function Page() {
   return (
@@ -31,24 +31,22 @@ export default function Page() {
 function DemoState() {
   const len = sculptures.length;
   const [pos, setPos] = useState(0);
-  const [cur, setCur] = useState(sculptures[pos]);
   const [showDesc, setShowDesc] = useState(false);
-  const [showBtnTxt, setShowBtnTxt] = useState("显示详情");
-  const handleNext = () => {
+
+  function handleNext() {
     const nextPos = (pos + 1) % len;
     setPos(nextPos);
-    setCur(sculptures[nextPos]);
   }
-  const handleShowDesc: MouseEventHandler<HTMLButtonElement> = () => {
-    setShowBtnTxt(showDesc ? "显示详情" : "隐藏详情");
+  function handleShowDesc() {
     setShowDesc(!showDesc);
   }
+  const cur = sculptures[pos];
   return (
     <div>
       <button style={btnStyle} onClick={handleNext}>下一个</button>
       <h2 style={h1Style}>{cur.name}</h2>
       <p>({pos + 1} of {len})</p>
-      <button style={btnStyle} onClick={handleShowDesc}>{showBtnTxt}</button>
+      <button style={btnStyle} onClick={handleShowDesc}>{showDesc ? "隐藏描述" : "显示描述"}</button>
       {showDesc && <p>{cur.description}</p>}
       <img src={cur.url} alt={cur.alt} />
     </div>
