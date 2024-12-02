@@ -5,6 +5,7 @@ import { bgStyle, btnStyle, h1Style } from "@/app/lib/definitions";
 import { reactAddInter } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import { FormEvent, useState } from "react";
+import { useImmer } from "use-immer";
 
 export default function Page() {
   return (
@@ -62,7 +63,7 @@ type Person = {
 
 
 function DemoObj() {
-  const [person, setPerson] = useState<Person>({
+  const [person, setPerson] = useImmer<Person>({
     name: 'Niki de Saint Phalle',
     artwork: {
       title: 'Blue Nana',
@@ -72,16 +73,24 @@ function DemoObj() {
   });
 
   function handleName(e: React.ChangeEvent<HTMLInputElement>) {
-    setPerson({ ...person, name: e.target.value });
+    setPerson(draft => {
+      draft.name = e.target.value
+    });
   }
   function handleArtworkTitle(e: React.ChangeEvent<HTMLInputElement>) {
-    setPerson({ ...person, artwork: { ...person.artwork, title: e.target.value } });
+    setPerson(draft => {
+      draft.artwork.title = e.target.value
+    });
   }
   function handleArtworkCity(e: React.ChangeEvent<HTMLInputElement>) {
-    setPerson({ ...person, artwork: { ...person.artwork, city: e.target.value } });
+    setPerson(draft => {
+      draft.artwork.city = e.target.value
+    });
   }
   function handleArtworkImage(e: React.ChangeEvent<HTMLInputElement>) {
-    setPerson({ ...person, artwork: { ...person.artwork, image: e.target.value } });
+    setPerson(draft => {
+      draft.artwork.image = e.target.value
+    });
   }
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", }}>
