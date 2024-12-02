@@ -46,8 +46,55 @@ export default function Page() {
           <h1 style={h1Style}>更新 state 中的对象（运用 &apos;...&apos; 展开语法复制对象）</h1>
           <DemoObj />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>更新 state 中的数组</h1>
+          <DemoArray />
+        </div>
       </div>
     </main>
+  );
+}
+
+type Art = {
+  id: number;
+  title: string;
+  seen: boolean;
+};
+const initArts: Art[] = [
+  { id: 0, title: 'Big Bellies', seen: false },
+  { id: 1, title: 'Lunar Landscape', seen: false },
+  { id: 2, title: 'Terracotta Army', seen: true },
+];
+
+function DemoArray() {
+  const [list, setList] = useState(initArts);
+  function onToggle(id: number, checked: boolean) {
+    setList(list.map(v => v.id == id ? {...v, seen: checked} : v));
+  }
+  return (
+    <>
+      <h1>Art Bucket List</h1>
+      <h2>My list of art to see:</h2>
+      <ArtItem arts={list} onToggle={onToggle} />
+    </>
+  );
+}
+function ArtItem({ arts, onToggle, }: {
+  arts: Art[],
+  onToggle: (id: number, checked: boolean) => void,
+}) {
+  return (
+    <ul>{arts.map(v => (
+      <li key={v.id}>
+        <label>
+          <input type="checkbox" checked={v.seen} onChange={ e => onToggle(v.id, e.target.checked)}/>
+          &nbsp;
+          {v.title}
+        </label>
+      </li>
+    ))}</ul>
   );
 }
 
