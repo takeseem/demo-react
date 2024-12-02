@@ -39,8 +39,77 @@ export default function Page() {
           <h1 style={h1Style}>把一系列 state 更新加入队列</h1>
           <DemoStateInc />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>更新 state 中的对象（运用 &apos;...&apos; 展开语法复制对象）</h1>
+          <DemoObj />
+        </div>
       </div>
     </main>
+  );
+}
+
+
+type Person = {
+  name: string;
+  artwork: {
+    title: string;
+    city: string;
+    image: string;
+  };
+};
+
+
+function DemoObj() {
+  const [person, setPerson] = useState<Person>({
+    name: 'Niki de Saint Phalle',
+    artwork: {
+      title: 'Blue Nana',
+      city: 'Hamburg',
+      image: 'https://i.imgur.com/Sd1AgUOm.jpg',
+    },
+  });
+
+  function handleName(e: React.ChangeEvent<HTMLInputElement>) {
+    setPerson({ ...person, name: e.target.value });
+  }
+  function handleArtworkTitle(e: React.ChangeEvent<HTMLInputElement>) {
+    setPerson({ ...person, artwork: { ...person.artwork, title: e.target.value } });
+  }
+  function handleArtworkCity(e: React.ChangeEvent<HTMLInputElement>) {
+    setPerson({ ...person, artwork: { ...person.artwork, city: e.target.value } });
+  }
+  function handleArtworkImage(e: React.ChangeEvent<HTMLInputElement>) {
+    setPerson({ ...person, artwork: { ...person.artwork, image: e.target.value } });
+  }
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", }}>
+      <label>
+        Name:
+        <input style={bgStyle} value={person.name} onChange={handleName} />
+      </label>
+      <label>
+        Title:
+        <input style={bgStyle} value={person.artwork.title} onChange={handleArtworkTitle} />
+      </label>
+      <label>
+        City:
+        <input style={bgStyle} value={person.artwork.city} onChange={handleArtworkCity} />
+      </label>
+      <label>
+        Image:
+        <input style={bgStyle} value={person.artwork.image} onChange={handleArtworkImage} />
+      </label>
+      <p>
+        <i>{person.artwork.title}</i>
+        {' by '}
+        {person.name}
+        <br />
+        (located in {person.artwork.city})
+      </p>
+      <img src={person.artwork.image} alt={person.artwork.title} width={"50%"} />
+    </div>
   );
 }
 
