@@ -69,9 +69,15 @@ const initArts: Art[] = [
 ];
 
 function DemoArray() {
-  const [list, setList] = useState(initArts);
+  const [list, setList] = useImmer(initArts);
   function onToggle(id: number, checked: boolean) {
-    setList(list.map(v => v.id == id ? {...v, seen: checked} : v));
+    setList(draft => {
+      draft.forEach(v => {
+        if (v.id == id) {
+          v.seen = checked;
+        }
+      });
+    });
   }
   return (
     <>
