@@ -33,8 +33,33 @@ export default function Page() {
           <h1 style={h1Style}>state 如同一张快照</h1>
           <DemoSend />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>把一系列 state 更新加入队列</h1>
+          <DemoStateInc />
+        </div>
       </div>
     </main>
+  );
+}
+
+function DemoStateInc() {
+  const [score, setScore] = useState(0);
+  function inc() {
+    setScore(score + 1);
+  }
+  return (
+    <>
+      <h1 style={h1Style}>Score: {score}</h1>
+      <button style={btnStyle} onClick={inc}>+1</button>
+      &nbsp;
+      <button style={btnStyle} onClick={() => {
+        inc();
+        inc();
+        inc();
+      }}>+3</button>
+    </>
   );
 }
 
