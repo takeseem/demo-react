@@ -32,23 +32,44 @@ export default function Page() {
   );
 }
 
+
+type Profile = {
+  firstName: string;
+  lastName: string;
+};
 function DemoEditProfile() {
+  const [profile, setProfile] = useState<Profile>({
+    firstName: "Jane",
+    lastName: "Jacobs",
+  });
+  const [isEdit, setIsEdit] = useState(false);
   return (
     <form style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-start", }}>
       <label>
         First name:{' '}
-        <b>Jane</b>
-        <input style={bgStyle} />
+        {isEdit
+          ? <input style={bgStyle} value={profile.firstName} onChange={(e) => {
+                setProfile({ ...profile, firstName: e.target.value })
+              }} />
+          : <b>{profile.firstName}</b>
+        }
       </label>
       <label>
         Last name:{' '}
-        <b>Jacobs</b>
-        <input style={bgStyle}/>
+        {isEdit
+          ? <input style={bgStyle} value={profile.lastName} onChange={(e) => {
+                setProfile({ ...profile, lastName: e.target.value })
+              }} />
+          : <b>{profile.lastName}</b>
+        }
       </label>
-      <button type="submit" style={btnStyle}>
-        Edit Profile
+      <button type="submit" style={btnStyle} onClick={(e) => {
+        e.preventDefault();
+        setIsEdit(!isEdit);
+      }}>
+        {isEdit ? "Save Profile" : "Edit Profile" }
       </button>
-      <p><i>Hello, Jane Jacobs!</i></p>
+      <p><i>Hello, {profile.firstName} {profile.lastName}!</i></p>
     </form>
   );
 }
