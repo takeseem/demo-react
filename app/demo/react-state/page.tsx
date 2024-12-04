@@ -9,6 +9,7 @@ import { bgStyle, btnStyle } from "@/app/lib/definitions";
 import TravelPlan from "./TravelPlan";
 import MailClient from "./MailClient";
 import MailClient2 from "./MailClient2";
+import SyncedInputs from "./SyncedInputs";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -57,6 +58,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 实现多选功能</h1>
           <p>你需要将 state 结构更改为支持多选功能。</p>
           <MailClient2 />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 同步输入状态</h1>
+          <p></p>
+          <SyncedInputs />
         </div>
       </div>
     </main>
