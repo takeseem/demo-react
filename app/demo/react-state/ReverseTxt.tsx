@@ -13,23 +13,19 @@ export default function ReverseTxt() {
       调换顺序
     </label>
   );
-  if (reverse) {
-    return (
-      <>
-        <Field label="姓氏" /> 
-        <Field label="名字" />
-        {checkbox}
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Field label="名字" /> 
-        <Field label="姓氏" />
-        {checkbox}
-      </>
-    );    
-  }
+  return (
+    <>
+      {!reverse
+        ? <Field key="firstName" label="姓氏" />
+        : <Field key="lastName" label="名字" />
+      }
+      {reverse
+        ? <Field key="firstName" label="姓氏" />
+        : <Field key="lastName" label="名字" />
+      }
+      {checkbox}
+    </>
+  );
 }
 
 function Field({ label }: { label: string }) {
