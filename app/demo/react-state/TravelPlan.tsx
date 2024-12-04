@@ -15,11 +15,13 @@ type Travel = {
 
 export default function TravelPlan() {
   const [items, setItems] = useState(initialItems);
-  const [total, setTotal] = useState(3);
-  const [packed, setPacked] = useState(1);
+  const total = items.length;
+  let packed = 0;
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].packed) packed++;
+  }
 
   function handleAddItem(title: string) {
-    setTotal(total + 1);
     setItems([
       ...items,
       {
@@ -31,11 +33,6 @@ export default function TravelPlan() {
   }
 
   function handleChangeItem(nextItem: Travel) {
-    if (nextItem.packed) {
-      setPacked(packed + 1);
-    } else {
-      setPacked(packed - 1);
-    }
     setItems(items.map(item => {
       if (item.id === nextItem.id) {
         return nextItem;
@@ -46,7 +43,6 @@ export default function TravelPlan() {
   }
 
   function handleDeleteItem(itemId: number) {
-    setTotal(total - 1);
     setItems(
       items.filter(item => item.id !== itemId)
     );
