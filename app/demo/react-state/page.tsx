@@ -4,7 +4,7 @@
 import { reactState } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import styles from "./react-state.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
@@ -27,11 +27,54 @@ export default function Page() {
           <p>编辑模式可以看到输入框，并编辑。当你改变输入框的内容时，欢迎信息会最下面实时更新。</p>
           <DemoEditProfile />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 修复一个未更新的组件</h1>
+          <p>选择不同的颜色时，Clock 组件将从其父组件接收到一个不同的 color 属性。然而，由于某种原因，显示的颜色没有更新。为什么？</p>
+          <FixClock />
+        </div>
       </div>
     </main>
   );
 }
 
+function FixClock() {
+  const time = useTime();
+  const [color, setColor] = useState('lightcoral');
+  return (
+    <div>
+      <p>
+        Pick a color:{' '}
+        <select value={color} onChange={e => setColor(e.target.value)} style={bgStyle}>
+          <option value="lightcoral">lightcoral</option>
+          <option value="midnightblue">midnightblue</option>
+          <option value="rebeccapurple">rebeccapurple</option>
+        </select>
+      </p>
+      <Clock color={color} time={time.toLocaleTimeString()} />
+    </div>
+  );
+}
+function useTime() {
+  const [time, setTime] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return time;
+}
+
+function Clock(props: { color: string, time: string }) {
+  const [color, setColor] = useState(props.color);
+  return (
+    <h1 style={{ color: color, }}>
+      {props.time}
+    </h1>
+  );
+}
 
 type Profile = {
   firstName: string;
