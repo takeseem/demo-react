@@ -68,9 +68,8 @@ function useTime() {
 }
 
 function Clock(props: { color: string, time: string }) {
-  const [color, setColor] = useState(props.color);
   return (
-    <h1 style={{ color: color, }}>
+    <h1 style={{ color: props.color, }}>
       {props.time}
     </h1>
   );
