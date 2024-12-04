@@ -51,7 +51,7 @@ export default function MailClient() {
             key={letter.id}
             letter={letter}
             isHighlighted={
-              letter === highlightedLetter
+              letter.id === highlightedLetter?.id
             }
             onHover={handleHover}
             onToggleStar={handleStar}

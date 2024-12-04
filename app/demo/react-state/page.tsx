@@ -46,7 +46,7 @@ export default function Page() {
 
         <hr style={{ margin: "1rem 0", }} />
         <div>
-          <h1 style={h1Style}>挑战: 修复消失的选项</h1>
+          <h1 style={h1Style}>挑战: 修复消失的高亮选择</h1>
           <p>bug: 当你点击“Star”或“Unstar”时，高亮会短暂消失</p>
           <MailClient />
         </div>
