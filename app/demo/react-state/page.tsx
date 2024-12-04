@@ -5,6 +5,7 @@ import { reactState } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import styles from "./react-state.module.css";
 import { useState } from "react";
+import { bgStyle, btnStyle } from "@/app/lib/definitions";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -19,10 +20,39 @@ export default function Page() {
           <p>点击图片外时：高亮背景，并删除图片边框的高亮效果</p>
           <DemoPicSelect />
         </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战：个人信息编辑器</h1>
+          <p>编辑模式可以看到输入框，并编辑。当你改变输入框的内容时，欢迎信息会最下面实时更新。</p>
+          <DemoEditProfile />
+        </div>
       </div>
     </main>
   );
 }
+
+function DemoEditProfile() {
+  return (
+    <form style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-start", }}>
+      <label>
+        First name:{' '}
+        <b>Jane</b>
+        <input style={bgStyle} />
+      </label>
+      <label>
+        Last name:{' '}
+        <b>Jacobs</b>
+        <input style={bgStyle}/>
+      </label>
+      <button type="submit" style={btnStyle}>
+        Edit Profile
+      </button>
+      <p><i>Hello, Jane Jacobs!</i></p>
+    </form>
+  );
+}
+
 
 function DemoPicSelect() {
   const [selected, setSelected] = useState(false);
