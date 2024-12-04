@@ -22,14 +22,18 @@ export const letters: Letter[] = [{
 
 
 export default function MailClient() {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [selectedIds, setSelectedIds] = useState<number[]>([]);
 
   // TODO: 支持多选
-  const selectedCount = 1;
+  const selectedCount = selectedIds.length;
 
   function handleToggle(toggledId: number) {
     // TODO: 支持多选
-    setSelectedId(toggledId);
+    const idx = selectedIds.findIndex(id => id === toggledId);
+    setSelectedIds(idx !== -1
+      ? selectedIds.toSpliced(idx, 1)
+      : selectedIds.toSpliced(selectedIds.length, 0, toggledId)
+    );
   }
 
   return (
@@ -42,7 +46,7 @@ export default function MailClient() {
             letter={letter}
             isSelected={
               // TODO: 支持多选
-              letter.id === selectedId
+              selectedIds.includes(letter.id)
             }
             onToggle={handleToggle}
           />
