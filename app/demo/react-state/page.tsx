@@ -13,6 +13,7 @@ import SyncedInputs from "./SyncedInputs";
 import FilterableList from "./FilterableList";
 import MissText from "./MissText";
 import ReverseTxt from "./ReverseTxt";
+import ContactManager from "./ConcatManager";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -89,6 +90,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 交换两个表单字段</h1>
           <p>bug: 如果填写“名字”输入框并勾选复选框，文本将保留在第一个输入框(也就是现在的“姓氏”)</p>
           <ReverseTxt />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 重置详情表单</h1>
+          <p>bug: 当你选中另一个联系人（比如 Alice），状态就会更新，但表单会一直显示之前那个联系人的详细信息</p>
+          <ContactManager />
         </div>
       </div>
     </main>
