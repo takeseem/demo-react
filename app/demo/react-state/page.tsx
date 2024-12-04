@@ -11,6 +11,7 @@ import MailClient from "./MailClient";
 import MailClient2 from "./MailClient2";
 import SyncedInputs from "./SyncedInputs";
 import FilterableList from "./FilterableList";
+import MissText from "./MissText";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -73,6 +74,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 列表过滤</h1>
           <p>使用 filterItems(foods, query) 方法来通过搜索条件过滤列表项</p>
           <FilterableList />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 修复丢失的输入框文本</h1>
+          <p>按下按钮时会展示一条消息，但同时也会意外地重置输入框</p>
+          <MissText />
         </div>
       </div>
     </main>
