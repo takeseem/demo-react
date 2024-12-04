@@ -10,6 +10,7 @@ import TravelPlan from "./TravelPlan";
 import MailClient from "./MailClient";
 import MailClient2 from "./MailClient2";
 import SyncedInputs from "./SyncedInputs";
+import FilterableList from "./FilterableList";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -63,8 +64,15 @@ export default function Page() {
         <hr style={{ margin: "1rem 0", }} />
         <div>
           <h1 style={h1Style}>挑战: 同步输入状态</h1>
-          <p></p>
+          <p>编辑一个输入框时，另一个输入框也会更新相同的文本，反之亦然。</p>
           <SyncedInputs />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 列表过滤</h1>
+          <p>使用 filterItems(foods, query) 方法来通过搜索条件过滤列表项</p>
+          <FilterableList />
         </div>
       </div>
     </main>
