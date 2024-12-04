@@ -6,6 +6,7 @@ import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import styles from "./react-state.module.css";
 import { useEffect, useState } from "react";
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
+import TravelPlan from "./TravelPlan";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -33,6 +34,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 修复一个未更新的组件</h1>
           <p>选择不同的颜色时，Clock 组件将从其父组件接收到一个不同的 color 属性。然而，由于某种原因，显示的颜色没有更新。为什么？</p>
           <FixClock />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 修复一个损坏的打包清单</h1>
+          <p>bug: 如果你将一个物品标记为已打包然后删除它，计数器就不会正确更新</p>
+          <TravelPlan />
         </div>
       </div>
     </main>
