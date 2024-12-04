@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
 import TravelPlan from "./TravelPlan";
 import MailClient from "./MailClient";
+import MailClient2 from "./MailClient2";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -49,6 +50,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 修复消失的高亮选择</h1>
           <p>bug: 当你点击“Star”或“Unstar”时，高亮会短暂消失</p>
           <MailClient />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 实现多选功能</h1>
+          <p>你需要将 state 结构更改为支持多选功能。</p>
+          <MailClient2 />
         </div>
       </div>
     </main>
