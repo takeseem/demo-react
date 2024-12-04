@@ -39,18 +39,21 @@ function filterItems(items: Food[], query: string) {
 }
 
 export default function FilterableList() {
+  const [query, setQuery] = useState('');
+  const filtered = filterItems(foods, query);
   return (
     <>
-      <SearchBar />
+      <SearchBar query={query} setQuery={setQuery} />
       <hr />
-      <List items={foods} />
+      <List items={filtered} />
     </>
   );
 }
 
-function SearchBar() {
-  const [query, setQuery] = useState('');
-
+function SearchBar({ query, setQuery, }: {
+  query: string;
+  setQuery: (query: string) => void;
+}) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value);
   }
