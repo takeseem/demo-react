@@ -12,6 +12,7 @@ import MailClient2 from "./MailClient2";
 import SyncedInputs from "./SyncedInputs";
 import FilterableList from "./FilterableList";
 import MissText from "./MissText";
+import ReverseTxt from "./ReverseTxt";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -81,6 +82,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 修复丢失的输入框文本</h1>
           <p>按下按钮时会展示一条消息，但同时也会意外地重置输入框</p>
           <MissText />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 交换两个表单字段</h1>
+          <p>bug: 如果填写“名字”输入框并勾选复选框，文本将保留在第一个输入框(也就是现在的“姓氏”)</p>
+          <ReverseTxt />
         </div>
       </div>
     </main>
