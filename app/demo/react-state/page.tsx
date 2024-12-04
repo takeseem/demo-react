@@ -7,6 +7,7 @@ import styles from "./react-state.module.css";
 import { useEffect, useState } from "react";
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
 import TravelPlan from "./TravelPlan";
+import MailClient from "./MailClient";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -41,6 +42,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 修复一个损坏的打包清单</h1>
           <p>bug: 如果你将一个物品标记为已打包然后删除它，计数器就不会正确更新</p>
           <TravelPlan />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 修复消失的选项</h1>
+          <p>bug: 当你点击“Star”或“Unstar”时，高亮会短暂消失</p>
+          <MailClient />
         </div>
       </div>
     </main>
