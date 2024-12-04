@@ -1,4 +1,4 @@
-import { faBrain, faHandshake, faHashtag, faT } from "@fortawesome/free-solid-svg-icons";
+import { faBrain, faHandshake, faHashtag, faStore, faT } from "@fortawesome/free-solid-svg-icons";
 import { Project } from "./definitions";
 import { faUikit } from "@fortawesome/free-brands-svg-icons";
 
@@ -58,11 +58,22 @@ const reactAddInter: Project = {
   link: `${myBlog}/code/fe/react/react-learn-02-add-inter.html`,
 };
 
+const reactState: Project = {
+  id: 'react-state',
+  name: 'React 状态管理',
+  desc: '随着你的应用不断变大，更有意识的去关注应用状态如何组织，以及数据如何在组件之间流动会对你很有帮助。冗余或重复的状态往往是缺陷的根源。在本节中，你将学习如何组织好状态，如何保持状态更新逻辑的可维护性，以及如何跨组件共享状态。',
+  href: '/demo/react-state',
+  icon: faStore,
+  pagePath: "/app/demo/react-state/page.tsx",
+  link: `${myBlog}/code/fe/react/react-learn-03-state.html`,
+};
+
 const projects: Project[] = [
-  gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter,
+  gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter, reactState,
 ];
 
 export {
   myBlog, myRepo, myRepoMain, myRepoCommitMain, myRepoBlameMain,
   projects, gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter,
+  reactState, 
  };
