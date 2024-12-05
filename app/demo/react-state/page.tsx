@@ -14,6 +14,7 @@ import FilterableList from "./FilterableList";
 import MissText from "./MissText";
 import ReverseTxt from "./ReverseTxt";
 import ContactManager from "./ConcatManager";
+import Gallery from "./Gallery";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -97,6 +98,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 重置详情表单</h1>
           <p>bug: 当你选中另一个联系人（比如 Alice），状态就会更新，但表单会一直显示之前那个联系人的详细信息</p>
           <ContactManager />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 清除正在加载的图片</h1>
+          <p>文本必须始终与图片一一对应，在你点击“下一张”时立即被清除</p>
+          <Gallery />
         </div>
       </div>
     </main>
