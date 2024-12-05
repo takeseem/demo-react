@@ -47,7 +47,7 @@ export default function Gallery() {
         {images.length} 张图片中的第 {index + 1} 张
       </h3>
       { /* eslint-disable @next/next/no-img-element */ }
-      <img src={image.src} alt={image.place} width={200} height={200} />
+      <img key={image.src} src={image.src} alt={image.place} width={150} height={150} />
       <p>
         {image.place}
       </p>
