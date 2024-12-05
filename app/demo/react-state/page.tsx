@@ -15,6 +15,7 @@ import MissText from "./MissText";
 import ReverseTxt from "./ReverseTxt";
 import ContactManager from "./ConcatManager";
 import Gallery from "./Gallery";
+import ContactList from "./ContactList";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -105,6 +106,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 清除正在加载的图片</h1>
           <p>文本必须始终与图片一一对应，在你点击“下一张”时立即被清除</p>
           <Gallery />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 修复列表中错位的 state</h1>
+          <p>bug: 切换显示顺序时，记住对应的邮箱是否显示的提示</p>
+          <ContactList />
         </div>
       </div>
     </main>
