@@ -23,7 +23,7 @@ export const initialState: MsgState = {
 };
 
 type Action = {
-  type: 'changed_selection' | 'edited_message';
+  type: 'changed_selection' | 'edited_message' | 'send_message';
   contactId?: number;
   message?: string;
 };
@@ -41,6 +41,12 @@ export function messengerReducer(state: MsgState, action: Action): MsgState {
       return {
         ...state,
         message: action.message as string,
+      };
+    }
+    case 'send_message' : {
+      return {
+        ...state,
+        message: '',
       };
     }
     default: {
@@ -112,7 +118,10 @@ function Chat({contact, message, dispatch}: {
         }}
       />
       <br />
-      <button style={btnStyle}>发送到 {contact.email}</button>
+      <button style={btnStyle} onClick={() => {
+        alert(`发送给 ${contact.email}: ${message}`);
+        dispatch({ type: "send_message", });
+      }}>发送到 {contact.email}</button>
     </section>
   );
 }
