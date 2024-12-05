@@ -1,30 +1,46 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
 import { useReducer } from "react";
 
-const contacts = [
+type Contact = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const contacts: Contact[] = [
   {id: 0, name: 'Taylor', email: 'taylor@mail.com'},
   {id: 1, name: 'Alice', email: 'alice@mail.com'},
   {id: 2, name: 'Bob', email: 'bob@mail.com'},
 ];
 
-export const initialState = {
+type MsgState = {
+  selectedId: number;
+  message: string;
+};
+export const initialState: MsgState = {
   selectedId: 0,
   message: '你好',
 };
 
-export function messengerReducer(state, action) {
+type Action = {
+  type: 'changed_selection' | 'edited_message';
+  contactId?: number;
+  message?: string;
+};
+
+export function messengerReducer(state: MsgState, action: Action): MsgState {
   switch (action.type) {
     case 'changed_selection': {
       return {
         ...state,
-        selectedId: action.contactId,
+        selectedId: action.contactId as number,
         message: '',
       };
     }
     case 'edited_message': {
       return {
         ...state,
-        message: action.message,
+        message: action.message as string,
       };
     }
     default: {
@@ -37,7 +53,7 @@ export function messengerReducer(state, action) {
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
   const message = state.message;
-  const contact = contacts.find((c) => c.id === state.selectedId);
+  const contact = contacts.find((c) => c.id === state.selectedId) as Contact;
   return (
     <div style={{ display: "flex", gap: "0.5rem", }}>
       <ContactList
@@ -55,7 +71,11 @@ export default function Messenger() {
   );
 }
 
-function ContactList({contacts, selectedId, dispatch}) {
+function ContactList({contacts, selectedId, dispatch}: {
+  contacts: Contact[];
+  selectedId: number;
+  dispatch: (action: Action) => void;
+}) {
   return (
     <section>
       <ul>
@@ -75,7 +95,11 @@ function ContactList({contacts, selectedId, dispatch}) {
   );
 }
 
-function Chat({contact, message, dispatch}) {
+function Chat({contact, message, dispatch}: {
+  contact: Contact;
+  message: string;
+  dispatch: (action: Action) => void
+}) {
   return (
     <section className="chat">
       <textarea style={{ ...bgStyle, height: "150px", }}
