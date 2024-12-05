@@ -15,11 +15,13 @@ const contacts: Contact[] = [
 
 type MsgState = {
   selectedId: number;
-  message: string;
+  messages: {
+    [id: number]: string;
+  };
 };
 export const initialState: MsgState = {
   selectedId: 0,
-  message: '你好',
+  messages: { 0: '你好' },
 };
 
 type Action = {
@@ -34,19 +36,24 @@ export function messengerReducer(state: MsgState, action: Action): MsgState {
       return {
         ...state,
         selectedId: action.contactId as number,
-        message: '',
       };
     }
     case 'edited_message': {
       return {
         ...state,
-        message: action.message as string,
+        messages: {
+          ...state.messages,
+          [state.selectedId]: action.message as string,
+        }
       };
     }
     case 'send_message' : {
       return {
         ...state,
-        message: '',
+        messages: {
+          ...state.messages,
+          [state.selectedId]: '',
+        }
       };
     }
     default: {
@@ -58,7 +65,7 @@ export function messengerReducer(state: MsgState, action: Action): MsgState {
 
 export default function Messenger() {
   const [state, dispatch] = useReducer(messengerReducer, initialState);
-  const message = state.message;
+  const message = state.messages[state.selectedId];
   const contact = contacts.find((c) => c.id === state.selectedId) as Contact;
   return (
     <div style={{ display: "flex", gap: "0.5rem", }}>
