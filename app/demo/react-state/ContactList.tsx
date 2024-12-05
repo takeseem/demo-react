@@ -16,10 +16,7 @@ const contacts: Contact[] = [
 export default function ContactList() {
   const [reverse, setReverse] = useState(false);
 
-  const displayedContacts = [...contacts];
-  if (reverse) {
-    displayedContacts.reverse();
-  }
+  const displayedContacts = reverse ? contacts.toReversed() : contacts;
 
   return (
     <>
@@ -34,8 +31,8 @@ export default function ContactList() {
         以相反的顺序显示
       </label>
       <ul>
-        {displayedContacts.map((contact, i) =>
-          <li key={i}>
+        {displayedContacts.map((contact) =>
+          <li key={contact.id}>
             <Contact contact={contact} />
           </li>
         )}
