@@ -16,6 +16,7 @@ import ReverseTxt from "./ReverseTxt";
 import ContactManager from "./ConcatManager";
 import Gallery from "./Gallery";
 import ContactList from "./ContactList";
+import Messenger from "./Messenger";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -113,6 +114,13 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 修复列表中错位的 state</h1>
           <p>bug: 切换显示顺序时，记住对应的邮箱是否显示的提示</p>
           <ContactList />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 通过事件处理函数 dispatch actions </h1>
+          <p></p>
+          <Messenger />
         </div>
       </div>
     </main>
