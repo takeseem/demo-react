@@ -64,8 +64,9 @@ function ContactList({contacts, selectedId, dispatch}) {
             <button style={btnStyle}
               onClick={() => {
                 // TODO: dispatch changed_selection
+                dispatch({ type: "changed_selection", contactId: contact.id, });
               }}>
-              {selectedId === contact.id ? <b>{contact.name}</b> : contact.name}
+              {selectedId === contact.id ? <b style={{ color: "red" }}>{contact.name}</b> : contact.name}
             </button>
           </li>
         ))}
@@ -83,6 +84,7 @@ function Chat({contact, message, dispatch}) {
         onChange={(e) => {
           // TODO: 派发 edited_message
           // (从 e.target.value 获取输入框的值)
+          dispatch({ type: "edited_message", message: e.target.value, });
         }}
       />
       <br />
