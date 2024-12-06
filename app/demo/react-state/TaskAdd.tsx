@@ -1,7 +1,7 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useState } from 'react';
 
-export default function AddTask({ onAddTask }) {
+export default function AddTask({ onAddTask, }: { onAddTask: (text: string) => void }) {
   const [text, setText] = useState('');
   return (
     <>

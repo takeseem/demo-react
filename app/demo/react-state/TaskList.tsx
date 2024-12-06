@@ -1,10 +1,15 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useState } from 'react';
+import { Task as TaskModel, } from './TaskContext';
 
 export default function TaskList({
   tasks,
   onChangeTask,
   onDeleteTask
+}: {
+  tasks: TaskModel[],
+  onChangeTask: (task: TaskModel) => void,
+  onDeleteTask: (taskId: number) => void
 }) {
   return (
     <ul>
@@ -21,7 +26,11 @@ export default function TaskList({
   );
 }
 
-function Task({ task, onChange, onDelete }) {
+function Task({ task, onChange, onDelete }: {
+  task: TaskModel;
+  onChange: (task: TaskModel) => void;
+  onDelete: (taskId: number) => void;
+}) {
   const [isEditing, setIsEditing] = useState(false);
   let taskContent;
   if (isEditing) {
