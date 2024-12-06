@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const places = [{
   id: 0,
@@ -37,6 +37,7 @@ const places = [{
   imageId: 'ZfQOOzf'
 }];
 
+const ImgSizeContext = createContext(100);
 
 export default function ContextApp() {
   const [isLarge, setIsLarge] = useState(false);
@@ -54,29 +55,29 @@ export default function ContextApp() {
         Use large images
       </label>
       <hr />
-      <List imageSize={imageSize} />
+      <ImgSizeContext.Provider value={imageSize}>
+        <List />
+      </ImgSizeContext.Provider>
     </>
   )
 }
 
-function List({ imageSize }) {
+function List() {
   const listItems = places.map(place =>
     <li key={place.id} style={{ display: "flex", gap: "0.5rem", alignItems: "center", padding: "0.5rem", }}>
       <Place
         place={place}
-        imageSize={imageSize}
       />
     </li>
   );
   return <ul>{listItems}</ul>;
 }
 
-function Place({ place, imageSize }) {
+function Place({ place, }) {
   return (
     <>
       <PlaceImage
         place={place}
-        imageSize={imageSize}
       />
       <p>
         <b>{place.name}</b>
@@ -86,8 +87,10 @@ function Place({ place, imageSize }) {
   );
 }
 
-function PlaceImage({ place, imageSize }) {
+function PlaceImage({ place, }) {
+  const imageSize = useContext(ImgSizeContext)
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={getImageUrl(place)}
       alt={place.name}
