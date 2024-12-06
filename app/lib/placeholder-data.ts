@@ -68,12 +68,24 @@ const reactState: Project = {
   link: `${myBlog}/code/fe/react/react-learn-03-state.html`,
 };
 
+const reactEscape: Project = {
+  id: 'react-escape',
+  name: 'React 脱围机制',
+  desc: 'Escape Hatches：有些组件可能需要控制和同步 React 之外的系统。例如，你可能需要使用浏览器 API 聚焦输入框，或者在没有 React 的情况下实现视频播放器，或者连接并监听远程服务器的消息。在本章中，你将学习到一些脱围机制，让你可以“走出” React 并连接到外部系统。大多数应用逻辑和数据流不应该依赖这些功能。',
+  href: '/demo/react-escape',
+  icon: faStore,
+  pagePath: "/app/demo/react-escape/page.tsx",
+  link: `${myBlog}/code/fe/react/react-learn-04-escape.html`,
+};
+
+
 const projects: Project[] = [
   gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter, reactState,
+  reactEscape, 
 ];
 
 export {
   myBlog, myRepo, myRepoMain, myRepoCommitMain, myRepoBlameMain,
   projects, gameTtt, reactThink, reactTypeScript, reactJsx, reactAddInter,
-  reactState, 
+  reactState, reactEscape, 
  };
