@@ -1,14 +1,8 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useState } from 'react';
-import { Task as TaskModel, useTasks, } from './TaskContext';
+import { Task as TaskModel, useTasks, useTasksDispatch, } from './TaskContext';
 
-export default function TaskList({
-  onChangeTask,
-  onDeleteTask
-}: {
-  onChangeTask: (task: TaskModel) => void,
-  onDeleteTask: (taskId: number) => void
-}) {
+export default function TaskList() {
   const tasks = useTasks();
   return (
     <ul>
@@ -16,8 +10,6 @@ export default function TaskList({
         <li key={task.id} >
           <Task
             task={task}
-            onChange={onChangeTask}
-            onDelete={onDeleteTask}
           />
         </li>
       ))}
@@ -25,12 +17,11 @@ export default function TaskList({
   );
 }
 
-function Task({ task, onChange, onDelete }: {
+function Task({ task, }: {
   task: TaskModel;
-  onChange: (task: TaskModel) => void;
-  onDelete: (taskId: number) => void;
 }) {
   const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useTasksDispatch();
   let taskContent;
   if (isEditing) {
     taskContent = (
@@ -38,9 +29,9 @@ function Task({ task, onChange, onDelete }: {
         <input style={bgStyle}
           value={task.text}
           onChange={e => {
-            onChange({
-              ...task,
-              text: e.target.value
+            dispatch({
+              type: "changed",
+              task: { ...task, text: e.target.value }
             });
           }} />
         <button style={btnStyle} onClick={() => setIsEditing(false)}>
@@ -64,14 +55,14 @@ function Task({ task, onChange, onDelete }: {
         type="checkbox"
         checked={task.done}
         onChange={e => {
-          onChange({
-            ...task,
-            done: e.target.checked
+          dispatch({
+            type: "changed",
+            task: { ...task, done: e.target.checked }
           });
         }}
       />
       {taskContent}
-      <button style={btnStyle} onClick={() => onDelete(task.id)}>
+      <button style={btnStyle} onClick={() => dispatch({ type: "deleted", id: task.id })}>
         Delete
       </button>
     </label>

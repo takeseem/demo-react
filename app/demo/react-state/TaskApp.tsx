@@ -7,10 +7,7 @@ export default function TaskApp() {
     <TasksProvider>
       <h1>Day off in Kyoto</h1>
       <AddTask />
-      <TaskList
-        onChangeTask={() => {}}
-        onDeleteTask={() => {}}
-      />
+      <TaskList />
     </TasksProvider>
   );
 }
