@@ -1,16 +1,15 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useState } from 'react';
-import { Task as TaskModel, } from './TaskContext';
+import { Task as TaskModel, useTasks, } from './TaskContext';
 
 export default function TaskList({
-  tasks,
   onChangeTask,
   onDeleteTask
 }: {
-  tasks: TaskModel[],
   onChangeTask: (task: TaskModel) => void,
   onDeleteTask: (taskId: number) => void
 }) {
+  const tasks = useTasks();
   return (
     <ul>
       {tasks.map(task => (

@@ -10,7 +10,6 @@ export default function TaskApp() {
         onAddTask={() => {}}
       />
       <TaskList
-        tasks={[]}
         onChangeTask={() => {}}
         onDeleteTask={() => {}}
       />

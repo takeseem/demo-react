@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, useReducer } from "react";
+import { createContext, Dispatch, ReactNode, useContext, useReducer } from "react";
 
 export type Task = {
   id: number;
@@ -6,13 +6,13 @@ export type Task = {
   done: boolean;
 };
 
-export const initialTasks: Task[] = [
+const initialTasks: Task[] = [
   { id: 0, text: 'Philosopher’s Path', done: true },
   { id: 1, text: 'Visit the temple', done: false },
   { id: 2, text: 'Drink matcha', done: false }
 ];
 
-export type TaskReducerAction = {
+type TaskReducerAction = {
   type: string & ("added" | "changed" | "deleted");
   id?: number;
   text?: string;
@@ -58,4 +58,8 @@ function tasksReducer(tasks: Task[], action: TaskReducerAction): Task[] {
       throw Error('Unknown action: ' + action.type);
     }
   }
+}
+
+export function useTasks() {
+  return useContext(TasksContext);
 }
