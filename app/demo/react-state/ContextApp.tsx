@@ -1,6 +1,13 @@
 import { createContext, useContext, useState } from "react";
 
-const places = [{
+type Place = {
+  id: number;
+  name: string;
+  description: string;
+  imageId: string;
+};
+
+const places: Place[] = [{
   id: 0,
   name: '南非开普敦的波卡普区',
   description: '为房屋选择亮色的传统始于 20 世纪后期。',
@@ -73,7 +80,7 @@ function List() {
   return <ul>{listItems}</ul>;
 }
 
-function Place({ place, }) {
+function Place({ place, }: { place: Place, }) {
   return (
     <>
       <PlaceImage
@@ -87,7 +94,7 @@ function Place({ place, }) {
   );
 }
 
-function PlaceImage({ place, }) {
+function PlaceImage({ place, }: {place: Place, }) {
   const imageSize = useContext(ImgSizeContext)
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -100,7 +107,7 @@ function PlaceImage({ place, }) {
   );
 }
 
-function getImageUrl(place) {
+function getImageUrl(place: Place) {
   return (
     'https://i.imgur.com/' +
     place.imageId +
