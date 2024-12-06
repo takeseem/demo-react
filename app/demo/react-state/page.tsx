@@ -18,6 +18,7 @@ import Gallery from "./Gallery";
 import ContactList from "./ContactList";
 import Messenger from "./Messenger";
 import ContextApp from "./ContextApp";
+import TaskApp from "./TaskApp";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -131,6 +132,15 @@ export default function Page() {
           <p>{'目前，App 将 imageSize 传递给 List，List 再将其传递给每个 Place，Place 又将其传递给 PlaceImage。移除 imageSize 参数，并在 App 组件中直接将其传递给 PlaceImage。'}</p>
           <p>{'你可以在 Context.js 中声明 context。'}</p>
           <ContextApp />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} id="useReducerAndContext"/>
+        <div>
+          <h1 style={h1Style}>结合使用 reducer 和 context</h1>
+          <p>第一步: 创建 context</p>
+          <p>第二步: 将 state 和 dispatch 函数放入 context</p>
+          <p>第三步: 在组件树中的任何地方使用 context</p>
+          <TaskApp />
         </div>
       </div>
     </main>
