@@ -17,6 +17,7 @@ import ContactManager from "./ConcatManager";
 import Gallery from "./Gallery";
 import ContactList from "./ContactList";
 import Messenger from "./Messenger";
+import ContextApp from "./ContextApp";
 
 const h1Style = { fontSize: "1.5rem", fontWeight: "bold", };
 export default function Page() {
@@ -121,6 +122,15 @@ export default function Page() {
           <h1 style={h1Style}>挑战: 通过事件处理函数 dispatch actions </h1>
           <p></p>
           <Messenger />
+        </div>
+
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>挑战: 用 context 替代逐层 props  </h1>
+          <p>{'在这个示例中，切换复选框状态会修改传入每个 <PlaceImage> 的 imageSize 参数。复选框的 state 保存在顶层的 App 组件中，但是每个 <PlaceImage> 都需要注意它。'}</p>
+          <p>{'目前，App 将 imageSize 传递给 List，List 再将其传递给每个 Place，Place 又将其传递给 PlaceImage。移除 imageSize 参数，并在 App 组件中直接将其传递给 PlaceImage。'}</p>
+          <p>{'你可以在 Context.js 中声明 context。'}</p>
+          <ContextApp />
         </div>
       </div>
     </main>
