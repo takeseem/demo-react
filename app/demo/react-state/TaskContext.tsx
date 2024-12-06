@@ -22,6 +22,8 @@ type TaskReducerAction = {
 const TasksDispatchContext = createContext<Dispatch<TaskReducerAction>>(() => { });
 const TasksContext = createContext<Task[]>([]);
 
+let nextId = 3;
+
 export default function TasksProvider({ children, }: { children: ReactNode, }) {
   const [tasks, dispatch] = useReducer(tasksReducer, initialTasks);
   return (
@@ -37,7 +39,7 @@ function tasksReducer(tasks: Task[], action: TaskReducerAction): Task[] {
   switch (action.type) {
     case 'added': {
       return [...tasks, {
-        id: action.id as number,
+        id: nextId++,
         text: action.text as string,
         done: false
       }];
@@ -60,6 +62,10 @@ function tasksReducer(tasks: Task[], action: TaskReducerAction): Task[] {
   }
 }
 
-export function useTasks() {
+export function useTasks(): Task[] {
   return useContext(TasksContext);
+}
+
+export function useTasksDispatch(): Dispatch<TaskReducerAction> {
+  return useContext(TasksDispatchContext);
 }
