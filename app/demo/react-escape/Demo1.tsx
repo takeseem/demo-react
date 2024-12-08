@@ -85,13 +85,13 @@ export default function Chat() {
 
 
 export function Toggle() {
-  const isOnRef = useRef(false);
+  const [isOnRef, setIsOnRef] = useState(false);
 
   return (
-    <button onClick={() => {
-      isOnRef.current = !isOnRef.current;
+    <button style={btnStyle} onClick={() => {
+      setIsOnRef(!isOnRef)
     }}>
-      {isOnRef.current ? '开' : '关'}
+      {isOnRef ? '开' : '关'}
     </button>
   );
 }
