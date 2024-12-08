@@ -138,3 +138,25 @@ export function Dashboard() {
   )
 }
 
+export function Chat2() {
+  const [text, setText] = useState('');
+
+  function handleSend() {
+    setTimeout(() => {
+      alert('正在发送：' + text);
+    }, 3000);
+  }
+
+  return (
+    <>
+      <input style={bgStyle}
+        value={text}
+        onChange={e => setText(e.target.value)}
+      />
+      <button style={btnStyle}
+        onClick={handleSend}>
+        发送
+      </button>
+    </>
+  );
+}

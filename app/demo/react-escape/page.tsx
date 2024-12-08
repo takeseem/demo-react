@@ -4,7 +4,7 @@
 import { h1Style } from "@/app/lib/definitions";
 import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import Chat, { Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
+import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 
 export default function Page() {
   return (
@@ -33,6 +33,9 @@ export default function Page() {
 
           <p>挑战: 修复防抖</p>
           <Dashboard />
+
+          <p>挑战: 读取最新的 state</p>
+          <Chat2 />
         </div>
       </div>
     </main>
