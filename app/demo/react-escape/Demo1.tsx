@@ -140,10 +140,11 @@ export function Dashboard() {
 
 export function Chat2() {
   const [text, setText] = useState('');
-
+  const textRef = useRef(text);
+  
   function handleSend() {
     setTimeout(() => {
-      alert('正在发送：' + text);
+      alert('正在发送：' + textRef.current);
     }, 3000);
   }
 
@@ -151,7 +152,10 @@ export function Chat2() {
     <>
       <input style={bgStyle}
         value={text}
-        onChange={e => setText(e.target.value)}
+        onChange={e => {
+          setText(e.target.value);
+          textRef.current = e.target.value;
+        }}
       />
       <button style={btnStyle}
         onClick={handleSend}>
