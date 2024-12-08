@@ -4,7 +4,7 @@
 import { h1Style } from "@/app/lib/definitions";
 import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
-import Chat, { Counter, Stopwatch } from "./Demo1";
+import Chat, { Counter, Stopwatch, Toggle } from "./Demo1";
 
 export default function Page() {
   return (
@@ -25,8 +25,11 @@ export default function Page() {
           <p>{`使用 useRef 存储 intervalId：const intervalRef = useRef<NodeJS.Timeout | null>(null);`}</p>
           <Stopwatch />
 
-          <p>挑战: 修复坏掉的聊天输入框 </p>
-          <Chat />          
+          <p>挑战: 修复坏掉的聊天输入框</p>
+          <Chat />
+
+          <p>挑战:  修复无法重新渲染的组件</p>
+          <Toggle />
         </div>
       </div>
     </main>
