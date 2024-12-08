@@ -95,3 +95,42 @@ export function Toggle() {
     </button>
   );
 }
+
+
+let timeoutID;
+
+function DebouncedButton({ onClick, children }) {
+  return (
+    <button style={btnStyle} onClick={() => {
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(() => {
+        onClick();
+      }, 1000);
+    }}>
+      {children}
+    </button>
+  );
+}
+
+export function Dashboard() {
+  return (
+    <div style={{ display: "flex", gap: "0.5rem", flexDirection: "column", alignItems: "flex-start", }}>
+      <DebouncedButton
+        onClick={() => alert('宇宙飞船已发射！')}
+      >
+        发射宇宙飞船
+      </DebouncedButton>
+      <DebouncedButton
+        onClick={() => alert('汤煮好了！')}
+      >
+        煮点儿汤
+      </DebouncedButton>
+      <DebouncedButton
+        onClick={() => alert('摇篮曲唱完了！')}
+      >
+        唱首摇篮曲
+      </DebouncedButton>
+    </div>
+  )
+}
+
