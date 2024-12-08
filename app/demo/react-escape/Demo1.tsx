@@ -47,11 +47,11 @@ export function Stopwatch() {
 export default function Chat() {
   const [text, setText] = useState('');
   const [isSending, setIsSending] = useState(false);
-  let timeoutID = null;
+  const timeoutID = useRef<NodeJS.Timeout | null>(null);
 
   function handleSend() {
     setIsSending(true);
-    timeoutID = setTimeout(() => {
+    timeoutID.current = setTimeout(() => {
       alert('已发送！');
       setIsSending(false);
     }, 3000);
@@ -59,7 +59,7 @@ export default function Chat() {
 
   function handleUndo() {
     setIsSending(false);
-    clearTimeout(timeoutID);
+    clearTimeout(timeoutID.current || void 0);
   }
 
   return (
