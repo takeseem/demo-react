@@ -97,13 +97,17 @@ export function Toggle() {
 }
 
 
-let timeoutID;
 
-function DebouncedButton({ onClick, children }) {
+
+function DebouncedButton({ onClick, children }: {
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  const timeoutID = useRef<NodeJS.Timeout | null>(null);
   return (
     <button style={btnStyle} onClick={() => {
-      clearTimeout(timeoutID);
-      timeoutID = setTimeout(() => {
+      clearTimeout(timeoutID.current || void 0);
+      timeoutID.current = setTimeout(() => {
         onClick();
       }, 1000);
     }}>
