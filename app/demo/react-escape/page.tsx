@@ -4,6 +4,7 @@
 import { h1Style } from "@/app/lib/definitions";
 import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
+import { Counter } from "./Demo1";
 
 export default function Page() {
   return (
@@ -12,9 +13,11 @@ export default function Page() {
       <div>
         <hr style={{ margin: "1rem 0", }} />
         <div>
-          <h1 style={h1Style}>标题</h1>
+          <h1 style={h1Style}>使用 ref 引用值</h1>
           <p>说明</p>
-          <>demo 组件</>
+          <div>
+            <Counter />
+          </div>
         </div>
       </div>
     </main>
