@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export function Form() {
   const [show, setShow] = useState(false);
@@ -38,10 +38,11 @@ function MyInput({ value, onChange }: {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  const ref = useRef(null);
+  const ref = useRef<HTMLInputElement>(null);
 
-  // TODO：下面的这种做法不会生效，请修复。
-  // ref.current.focus()    
+  useEffect(() => {
+    ref.current?.focus();
+  }, []);
 
   return (
     <input style={bgStyle}
