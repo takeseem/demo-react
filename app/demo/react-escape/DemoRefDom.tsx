@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
-import { useRef, useState, } from 'react';
+import { forwardRef, Ref, useRef, useState, } from 'react';
 import { flushSync } from 'react-dom';
 
 export function VideoPlayer() {
@@ -104,26 +104,41 @@ export default function CatFriends() {
 }
 
 export function PageSearch() {
+  const ref = useRef<HTMLInputElement>(null);
   return (
     <>
       <nav>
-        <SearchButton />
+        <SearchButton onClick={() => ref.current?.focus()} />
       </nav>
-      <SearchInput />
+      <SearchInputWithRef ref={ref} />
     </>
   );
 }
-function SearchButton() {
+function SearchButton({ onClick }: { onClick: () => void; }) {
   return (
-    <button style={btnStyle}>
+    <button style={btnStyle} onClick={onClick}>
       搜索
     </button>
   );
 }
-function SearchInput() {
+
+// 第一种方式定义 forwardRef
+function SearchInput(_props: object, ref: Ref<HTMLInputElement>) {
   return (
-    <input style={bgStyle}
+    <input style={bgStyle} ref={ref}
       placeholder="找什么呢？"
     />
   );
 }
+const SearchInputWithRef = forwardRef(SearchInput);
+
+// 第二种方式定义 forwardRef
+const SearchInput2 = forwardRef<HTMLInputElement>((_props, ref: Ref<HTMLInputElement>) => {
+  return (
+    <input style={bgStyle}
+      placeholder="找什么呢？"
+      ref={ref}
+    />
+  );
+});
+SearchInput2.displayName = 'SearchInput2';
