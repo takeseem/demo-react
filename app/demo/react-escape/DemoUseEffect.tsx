@@ -58,7 +58,7 @@ export function Form2() {
   const [show, setShow] = useState(false);
   const [firstName, setFirstName] = useState('Taylor');
   const [lastName, setLastName] = useState('Swift');
-  const [upper, setUpper] = useState(false);
+  const upper = useState(false);
   const name = firstName + ' ' + lastName;
   return (
     <>
