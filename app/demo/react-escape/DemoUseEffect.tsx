@@ -110,3 +110,28 @@ function MyInput2({ shouldFocus, value, onChange }: {
     />
   );
 }
+
+export function Form3() {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button style={btnStyle} onClick={() => setShow(s => !s)}>{show ? '隐藏' : '展示'}计数器</button>
+      <br />
+      <hr />
+      {show && <Counter />}
+    </>
+  );
+}
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    function onTick() {
+      setCount(c => c + 1);
+    }
+
+    setInterval(onTick, 1000);
+  }, []);
+
+  return <h1>{count}</h1>;
+}
