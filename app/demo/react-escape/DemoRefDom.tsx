@@ -49,3 +49,50 @@ export function PageFocus() {
     </>
   );
 }
+
+
+type CatItem = {
+  id: number;
+  imageUrl: string;
+};
+const catList: CatItem[] = [];
+for (let i = 0; i < 10; i++) {
+  catList.push({
+    id: i,
+    imageUrl: 'https://loremflickr.com/250/200/cat?lock=' + i
+  });
+}
+export default function CatFriends() {
+  const [index, setIndex] = useState(0);
+  return (
+    <>
+      <nav>
+        <button style={btnStyle} onClick={() => {
+          if (index < catList.length - 1) {
+            setIndex(index + 1);
+          } else {
+            setIndex(0);
+          }
+        }}>
+          下一个
+        </button>
+      </nav>
+      <div style={{ width: '100%', overflow: 'hidden', }}>
+        <ul style={{ whiteSpace: 'nowrap', }}>
+          {catList.map((cat, i) => (
+            <li key={cat.id} style={{ display: 'inline-block', padding: "0.5rem", }}>
+              <img
+                style={{
+                  padding: "0.5rem",
+                  background: index === i ? '#00649666' : '',
+                }}
+                src={cat.imageUrl}
+                alt={'猫猫 #' + cat.id}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  );
+}
