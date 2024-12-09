@@ -143,10 +143,16 @@ export function Page4() {
   const [bio, setBio] = useState<string | null>(null);
 
   useEffect(() => {
+    let ignore = false;
     setBio(null);
     fetchBio(person).then(result => {
+      if (ignore) return;
+
       setBio(result);
     });
+    return () => {
+      ignore = true;
+    }
   }, [person]);
 
   return (
