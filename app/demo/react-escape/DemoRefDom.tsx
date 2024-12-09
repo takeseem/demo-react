@@ -1,5 +1,6 @@
 import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useRef, useState, } from 'react';
+import { flushSync } from 'react-dom';
 
 export function VideoPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -64,28 +65,28 @@ for (let i = 0; i < 10; i++) {
 }
 export default function CatFriends() {
   const [index, setIndex] = useState(0);
-  const ref = useRef<HTMLUListElement>(null);
+  const ref = useRef<HTMLLIElement>(null);
   return (
     <>
       <nav>
         <button style={btnStyle} onClick={() => {
           const nextIndex = index < catList.length - 1 ? index + 1 : 0;
-          setIndex(nextIndex);
-          if (ref.current) {
-            ref.current.children[nextIndex].scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'center'
-            });
-          }
+          flushSync(() => {
+            setIndex(nextIndex);
+          });
+          ref.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+          })
         }}>
           下一个
         </button>
       </nav>
       <div style={{ width: '100%', overflow: 'hidden', }}>
-        <ul style={{ whiteSpace: 'nowrap', }} ref={ref}>
+        <ul style={{ whiteSpace: 'nowrap', }}>
           {catList.map((cat, i) => (
-            <li key={cat.id} style={{ display: 'inline-block', padding: "0.5rem", }}>
+            <li key={cat.id} ref={index == i ? ref : null} style={{ display: 'inline-block', padding: "0.5rem", }}>
               <img
                 style={{
                   padding: "0.5rem",
