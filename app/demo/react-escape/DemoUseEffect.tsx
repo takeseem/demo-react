@@ -96,10 +96,11 @@ function MyInput2({ shouldFocus, value, onChange }: {
 }) {
   const ref = useRef<HTMLInputElement>(null);
 
-  // TODO：只在 shouldFocus 为 true 时才调用 focus()
   useEffect(() => {
-    ref.current?.focus();
-  }, []);
+    if (shouldFocus) {
+      ref.current?.focus();
+    }
+  }, [shouldFocus]);
 
   return (
     <input style={bgStyle}
