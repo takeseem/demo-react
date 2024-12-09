@@ -5,6 +5,7 @@ import { h1Style } from "@/app/lib/definitions";
 import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
+import { VideoPlayer } from "./DemoRefDom";
 
 export default function Page() {
   return (
@@ -36,6 +37,20 @@ export default function Page() {
 
           <p>挑战: 读取最新的 state</p>
           <Chat2 />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>使用 ref 操作 DOM</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/manipulating-the-dom-with-refs#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+          <p>第 1 个挑战 共 4 个挑战: 播放和暂停视频 </p>
+          <VideoPlayer />
         </div>
       </div>
     </main>
