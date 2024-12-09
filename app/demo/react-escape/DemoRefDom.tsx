@@ -37,12 +37,13 @@ export function VideoPlayer() {
 
 
 export function PageFocus() {
+  const ref = useRef<HTMLInputElement>(null);
   return (
     <>
       <nav>
-        <button style={btnStyle}>搜索</button>
+        <button style={btnStyle} onClick={() => ref.current?.focus()}>搜索</button>
       </nav>
-      <input style={bgStyle}
+      <input style={bgStyle} ref={ref}
         placeholder="找什么呢？"
       />
     </>
