@@ -136,3 +136,38 @@ function Counter() {
 
   return <h1>{count}</h1>;
 }
+
+
+export function Page4() {
+  const [person, setPerson] = useState('Alice');
+  const [bio, setBio] = useState<string | null>(null);
+
+  useEffect(() => {
+    setBio(null);
+    fetchBio(person).then(result => {
+      setBio(result);
+    });
+  }, [person]);
+
+  return (
+    <>
+      <select style={bgStyle} value={person} onChange={e => {
+        setPerson(e.target.value);
+      }}>
+        <option value="Alice">Alice</option>
+        <option value="Bob">Bob</option>
+        <option value="Taylor">Taylor</option>
+      </select>
+      <hr />
+      <p><i>{bio ?? '加载中……'}</i></p>
+    </>
+  );
+}
+function fetchBio(person: string) {
+  const delay = person === 'Bob' ? 2000 : 200;
+  return new Promise<string>(resolve => {
+    setTimeout(() => {
+      resolve('这是' + person + '的传记。');
+    }, delay);
+  })
+}

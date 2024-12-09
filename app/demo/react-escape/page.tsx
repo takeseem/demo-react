@@ -6,7 +6,7 @@ import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
-import { Form, Form2, Form3 } from "./DemoUseEffect";
+import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 
 export default function Page() {
   return (
@@ -82,6 +82,9 @@ export default function Page() {
 
           <p>第 3 个挑战 共 4 个挑战: 修复会触发两次的定时器</p>
           <Form3 />
+
+          <p>第 4 个挑战 共 4 个挑战: 解决在 Effect 中获取数据的问题</p>
+          <Page4 />
         </div>
       </div>
     </main>
