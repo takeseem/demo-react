@@ -1,4 +1,4 @@
-import { btnStyle } from '@/app/lib/definitions';
+import { bgStyle, btnStyle } from '@/app/lib/definitions';
 import { useRef, useState, } from 'react';
 
 export function VideoPlayer() {
@@ -33,4 +33,18 @@ export function VideoPlayer() {
       </video>
     </>
   )
+}
+
+
+export function PageFocus() {
+  return (
+    <>
+      <nav>
+        <button style={btnStyle}>搜索</button>
+      </nav>
+      <input style={bgStyle}
+        placeholder="找什么呢？"
+      />
+    </>
+  );
 }
