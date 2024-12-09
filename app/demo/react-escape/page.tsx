@@ -6,6 +6,7 @@ import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
+import { Form } from "./DemoUseEffect";
 
 export default function Page() {
   return (
@@ -60,6 +61,21 @@ export default function Page() {
 
           <p>第 4 个挑战 共 4 个挑战: 使分开的组件中的搜索域获得焦点</p>
           <PageSearch />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>使用 Effect 进行同步</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/synchronizing-with-effects#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+          
+          <p>第 1 个挑战 共 4 个挑战: 挂载后聚焦于表单字段</p>
+          <Form />
         </div>
       </div>
     </main>
