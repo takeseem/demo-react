@@ -102,3 +102,28 @@ export default function CatFriends() {
     </>
   );
 }
+
+export function PageSearch() {
+  return (
+    <>
+      <nav>
+        <SearchButton />
+      </nav>
+      <SearchInput />
+    </>
+  );
+}
+function SearchButton() {
+  return (
+    <button style={btnStyle}>
+      搜索
+    </button>
+  );
+}
+function SearchInput() {
+  return (
+    <input style={bgStyle}
+      placeholder="找什么呢？"
+    />
+  );
+}
