@@ -6,7 +6,7 @@ import { reactEscape } from "@/app/lib/placeholder-data";
 import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
-import { Form } from "./DemoUseEffect";
+import { Form, Form2 } from "./DemoUseEffect";
 
 export default function Page() {
   return (
@@ -73,9 +73,12 @@ export default function Page() {
               尝试一些挑战
             </a>
           </p>
-          
+
           <p>第 1 个挑战 共 4 个挑战: 挂载后聚焦于表单字段</p>
           <Form />
+
+          <p>第 2 个挑战 共 4 个挑战: 有条件地聚焦于表单字段</p>
+          <Form2 />
         </div>
       </div>
     </main>
