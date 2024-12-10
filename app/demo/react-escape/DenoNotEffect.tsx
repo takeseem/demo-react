@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Todo = {
   id: number;
@@ -76,3 +76,56 @@ function NewTodo({ onAdd }: {
   );
 }
 
+// 第 2 个挑战 共 4 个挑战: 不用 Effect 缓存计算结果
+let calls = 0;
+function getVisibleTodos(todos: Todo[], showActive: boolean) {
+  console.log(`getVisibleTodos() 被调用了 ${++calls} 次`);
+  const activeTodos = todos.filter(todo => !todo.completed);
+  const visibleTodos = showActive ? activeTodos : todos;
+  return visibleTodos;
+}
+
+export function TodoList2() {
+  const [todos, setTodos] = useState(initialTodos);
+  const [showActive, setShowActive] = useState(false);
+  const [text, setText] = useState('');
+  const [visibleTodos, setVisibleTodos] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    setVisibleTodos(getVisibleTodos(todos, showActive));
+  }, [todos, showActive]);
+
+  function handleAddClick() {
+    setText('');
+    setTodos([...todos, createTodo(text)]);
+  }
+
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", gap: "0.5rem",
+      alignItems: "flex-start", padding: "0.5rem", 
+    }}>
+      <label>
+        <input
+          type="checkbox"
+          checked={showActive}
+          onChange={e => setShowActive(e.target.checked)}
+        />
+        只显示未完成的事项
+      </label>
+      <div>
+        <input style={bgStyle} value={text} onChange={e => setText(e.target.value)} />
+        <button style={btnStyle} onClick={handleAddClick}>
+          添加
+        </button>
+      </div>
+      <ul>
+        {visibleTodos.map(todo => (
+          <li key={todo.id}>
+            {todo.completed ? <s>{todo.text}</s> : todo.text}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}

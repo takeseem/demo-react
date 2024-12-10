@@ -7,7 +7,7 @@ import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
-import { TodoList } from "./DenoNotEffect";
+import { TodoList, TodoList2 } from "./DenoNotEffect";
 
 export default function Page() {
   return (
@@ -101,6 +101,9 @@ export default function Page() {
 
           <p>第 1 个挑战 共 4 个挑战: 不用 Effect 转换数据</p>
           <TodoList />
+
+          <p>第 2 个挑战 共 4 个挑战: 不用 Effect 缓存计算结果</p>
+          <TodoList2 />
         </div>
       </div>
     </main>
