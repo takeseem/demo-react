@@ -157,6 +157,9 @@ export default function Page() {
 
           <p>第 2 个挑战 共 4 个挑战: 修复一个冻结的计数器</p>
           <TimerApp2 />
+
+          <p>第 3 个挑战 共 4 个挑战: 修复不可调整的延迟</p>
+          {/* <TimerApp3 /> */}
         </div>
       </div>
     </main>
