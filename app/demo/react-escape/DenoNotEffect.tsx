@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 type Todo = {
   id: number;
@@ -173,7 +173,7 @@ export function ContactManager() {
         onSelect={id => setSelectedId(id)}
       />
       <hr style={{ margin: "0.5rem 0", width: "18rem", }}/>
-      <EditContact
+      <EditContact key={selectedContact?.id}
         savedContact={selectedContact as Contact}
         onSave={handleSave}
       />
@@ -188,10 +188,6 @@ export function EditContact({ savedContact, onSave }: {
   const [name, setName] = useState(savedContact.name);
   const [email, setEmail] = useState(savedContact.email);
 
-  useEffect(() => {
-    setName(savedContact.name);
-    setEmail(savedContact.email);
-  }, [savedContact]);
 
   return (
     <section style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "0.5rem", }}>
