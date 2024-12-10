@@ -46,7 +46,10 @@ export function TodoList() {
   }, [activeTodos]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", alignItems: "flex-start", }}>
+    <div style={{
+      display: "flex", flexDirection: "column", gap: "0.5rem",
+      alignItems: "flex-start", padding: "0.5rem", 
+    }}>
       <label>
         <input
           type="checkbox"
