@@ -139,3 +139,80 @@ export function App3() {
     </>
   );
 }
+
+// 第 4 个挑战 共 5 个挑战: 修复连接开关
+export function ChatApp4() {
+  const [roomId, setRoomId] = useState('general');
+  const [isEncrypted, setIsEncrypted] = useState(false);
+  return (
+    <div style={{ display: "flex", gap: "0.5rem", flexDirection: "column", alignItems: "flex-start", padding: "0.5rem", }}>
+      <label>
+        选择聊天室：{' '}
+        <select style={bgStyle}
+          value={roomId}
+          onChange={e => setRoomId(e.target.value)}
+        >
+          <option value="general">所有</option>
+          <option value="travel">旅游</option>
+          <option value="music">音乐</option>
+        </select>
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={isEncrypted}
+          onChange={e => setIsEncrypted(e.target.checked)}
+        />
+        启用加密
+      </label>
+      <hr style={{ width: "16rem", }}/>
+      <ChatRoom4
+        roomId={roomId}
+        createConnection={isEncrypted ?
+          createEncryptedConnection :
+          createUnencryptedConnection
+        }
+      />
+    </div>
+  );
+}
+type Connection = {
+  connect(): void;
+  disconnect(): void;
+};
+function createEncryptedConnection(roomId: string): Connection {
+  // 实际的实现将会连接到服务器
+  return {
+    connect() {
+      console.log('✅ 🔐 建立连接 "' + roomId + '... (加密)');
+    },
+    disconnect() {
+      console.log('❌ 🔐 断开连接 "' + roomId + '" room (加密)');
+    }
+  };
+}
+
+function createUnencryptedConnection(roomId: string): Connection {
+  // 实际的实现将会连接到服务器
+  return {
+    connect() {
+      console.log('✅ 建立连接 "' + roomId + '... (未加密)');
+    },
+    disconnect() {
+      console.log('❌ 断开连接 "' + roomId + '" room (未加密)');
+    }
+  };
+}
+function ChatRoom4({ roomId, createConnection }: {
+  roomId: string;
+  createConnection: (roomId: string) => Connection;
+}) {
+  useEffect(() => {
+    const connection = createConnection(roomId);
+    connection.connect();
+    return () => connection.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomId]);
+
+  return <h1>欢迎来到 {roomId} 聊天室！</h1>;
+}
