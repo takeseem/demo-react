@@ -8,7 +8,7 @@ import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
-import { ChatApp } from "./DemoEffectLife";
+import { App2, ChatApp } from "./DemoEffectLife";
 
 export default function Page() {
   return (
@@ -126,6 +126,9 @@ export default function Page() {
 
           <p>第 1 个挑战 共 5 个挑战: 修复每次输入均重新连接</p>
           <ChatApp />
+
+          <p>第 2 个挑战 共 5 个挑战: 打开和关闭状态同步</p>
+          <App2 />
         </div>
       </div>
     </main>
