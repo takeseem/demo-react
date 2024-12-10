@@ -9,6 +9,7 @@ import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
+import { TimerApp1 } from "./DemoEffectEvent";
 
 export default function Page() {
   return (
@@ -138,6 +139,21 @@ export default function Page() {
 
           <p>第 5 个挑战 共 5 个挑战: 填充一系列选择框</p>
           <EffectLifeApp5 />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>将事件从 Effect 中分开</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/separating-events-from-effects#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+
+          <p>第 1 个挑战 共 4 个挑战: 修复一个不更新的变量</p>
+          <TimerApp1 />
         </div>
       </div>
     </main>
