@@ -9,7 +9,7 @@ import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
-import { TimerApp1 } from "./DemoEffectEvent";
+import { TimerApp1, TimerApp2 } from "./DemoEffectEvent";
 
 export default function Page() {
   return (
@@ -154,6 +154,9 @@ export default function Page() {
 
           <p>第 1 个挑战 共 4 个挑战: 修复一个不更新的变量</p>
           <TimerApp1 />
+
+          <p>第 2 个挑战 共 4 个挑战: 修复一个冻结的计数器</p>
+          <TimerApp2 />
         </div>
       </div>
     </main>
