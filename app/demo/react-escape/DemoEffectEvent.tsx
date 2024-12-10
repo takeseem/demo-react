@@ -1,4 +1,5 @@
 import { btnStyle } from "@/app/lib/definitions";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { experimental_useEffectEvent as useEffectEvent, useEffect, useRef, useState } from "react";
 
 
@@ -87,49 +88,46 @@ export function TimerApp3() {
   const [increment, setIncrement] = useState(1);
   const [delay, setDelay] = useState(100);
 
-  const onTick = useEffectEvent(() => {
-    setCount(c => c + increment);
-  });
-
-  const onMount = useEffectEvent(() => {
-    return setInterval(() => {
-      onTick();
-    }, delay);
-  });
+  const incRef = useRef(increment);
+  useEffect(() => {
+    incRef.current = increment;
+  }, [increment]);
 
   useEffect(() => {
-    const id = onMount();
+    const id = setInterval(() => {
+      setCount(c => c + incRef.current);
+    }, delay);
     return () => {
       clearInterval(id);
     }
-  }, []);
+  }, [delay]);
 
   return (
     <>
       <h1>
         Counter: {count}
-        <button onClick={() => setCount(0)}>Reset</button>
+        <button onClick={() => setCount(0)} style={btnStyle}>Reset</button>
       </h1>
       <hr />
       <p>
         Increment by:
         <button disabled={increment === 0} onClick={() => {
           setIncrement(i => i - 1);
-        }}>–</button>
+        }} style={btnStyle}>–</button>
         <b>{increment}</b>
         <button onClick={() => {
           setIncrement(i => i + 1);
-        }}>+</button>
+        }} style={btnStyle}>+</button>
       </p>
       <p>
         Increment delay:
         <button disabled={delay === 100} onClick={() => {
           setDelay(d => d - 100);
-        }}>–100 ms</button>
+        }} style={btnStyle}>–100 ms</button>
         <b>{delay} ms</b>
         <button onClick={() => {
           setDelay(d => d + 100);
-        }}>+100 ms</button>
+        }} style={btnStyle}>+100 ms</button>
       </p>
     </>
   );

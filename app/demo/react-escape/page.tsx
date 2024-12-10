@@ -9,7 +9,7 @@ import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
-import { TimerApp1, TimerApp2 } from "./DemoEffectEvent";
+import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
 
 export default function Page() {
   return (
@@ -159,7 +159,7 @@ export default function Page() {
           <TimerApp2 />
 
           <p>第 3 个挑战 共 4 个挑战: 修复不可调整的延迟</p>
-          {/* <TimerApp3 /> */}
+          <TimerApp3 />
         </div>
       </div>
     </main>
