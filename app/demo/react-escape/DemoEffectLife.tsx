@@ -211,8 +211,7 @@ function ChatRoom4({ roomId, createConnection }: {
     const connection = createConnection(roomId);
     connection.connect();
     return () => connection.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [roomId]);
+  }, [roomId, createConnection]);
 
   return <h1>欢迎来到 {roomId} 聊天室！</h1>;
 }
