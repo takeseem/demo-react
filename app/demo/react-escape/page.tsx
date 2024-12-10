@@ -7,6 +7,7 @@ import { ProjectPageInfo } from "@/app/ui/demo/ProjectPageInfo";
 import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
+import { TodoList } from "./DenoNotEffect";
 
 export default function Page() {
   return (
@@ -85,6 +86,21 @@ export default function Page() {
 
           <p>第 4 个挑战 共 4 个挑战: 解决在 Effect 中获取数据的问题</p>
           <Page4 />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>你可能不需要 Effect</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/you-might-not-need-an-effect#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+
+          <p>第 1 个挑战 共 4 个挑战: 不用 Effect 转换数据</p>
+          <TodoList />
         </div>
       </div>
     </main>
