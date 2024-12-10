@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type Todo = {
   id: number;
@@ -25,25 +25,8 @@ const initialTodos: Todo[] = [
 export function TodoList() {
   const [todos, setTodos] = useState(initialTodos);
   const [showActive, setShowActive] = useState(false);
-  const [activeTodos, setActiveTodos] = useState<Todo[]>([]);
-  const [visibleTodos, setVisibleTodos] = useState<Todo[]>([]);
-  const [footer, setFooter] = useState<JSX.Element | null>(null);
-
-  useEffect(() => {
-    setActiveTodos(todos.filter(todo => !todo.completed));
-  }, [todos]);
-
-  useEffect(() => {
-    setVisibleTodos(showActive ? activeTodos : todos);
-  }, [showActive, todos, activeTodos]);
-
-  useEffect(() => {
-    setFooter(
-      <footer>
-        {activeTodos.length} 项待办
-      </footer>
-    );
-  }, [activeTodos]);
+  const activeTodos = todos.filter(todo => !todo.completed);
+  const visibleTodos = showActive ? activeTodos : todos;
 
   return (
     <div style={{
@@ -66,7 +49,9 @@ export function TodoList() {
           </li>
         ))}
       </ul>
-      {footer}
+      <footer>
+        {activeTodos.length} 项待办
+      </footer>
     </div>
   );
 }

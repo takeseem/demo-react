@@ -87,6 +87,7 @@ export default function CatFriends() {
         <ul style={{ whiteSpace: 'nowrap', }}>
           {catList.map((cat, i) => (
             <li key={cat.id} ref={index == i ? ref : null} style={{ display: 'inline-block', padding: "0.5rem", }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 style={{
                   padding: "0.5rem",
