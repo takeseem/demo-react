@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 
 type Todo = {
   id: number;
@@ -256,17 +256,13 @@ function ContactList({ contacts, selectedId, onSelect }: {
 
 // 第 4 个挑战 共 4 个挑战: 不用 Effect 提交表单
 export function FormSubmit4() {
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    if (!showForm) {
-      sendMessage(message);
-    }
-  }, [showForm, message]);
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    sendMessage(message);
     setShowForm(false);
   }
 
