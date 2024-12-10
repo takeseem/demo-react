@@ -99,19 +99,20 @@ export function App2() {
 // 第 3 个挑战 共 5 个挑战: 寻找过时值的错误
 export function App3() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [canMove, setCanMove] = useState(true);
+  const [canMove, setCanMove] = useState(false);
 
-  function handleMove(e: PointerEvent) {
-    if (canMove) {
-      setPosition({ x: e.clientX, y: e.clientY });
-    }
-  }
 
   useEffect(() => {
+
+    function handleMove(e: PointerEvent) {
+      if (canMove) {
+        setPosition({ x: e.clientX, y: e.clientY });
+      }
+    }
+
     window.addEventListener('pointermove', handleMove);
     return () => window.removeEventListener('pointermove', handleMove);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [canMove]);
 
   return (
     <>
