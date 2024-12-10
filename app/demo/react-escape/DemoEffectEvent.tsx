@@ -1,5 +1,5 @@
 import { btnStyle } from "@/app/lib/definitions";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 // 第 1 个挑战 共 4 个挑战: 修复一个不更新的变量 
@@ -44,14 +44,19 @@ export function TimerApp2() {
   const [count, setCount] = useState(0);
   const [increment, setIncrement] = useState(1);
 
+  const incRef = useRef(increment);
+  useEffect(() => {
+    incRef.current = increment;
+  }, [increment]);
+
   useEffect(() => {
     const id = setInterval(() => {
-      setCount(c => c + increment);
+      setCount(c => c + incRef.current);
     }, 1000);
     return () => {
       clearInterval(id);
     };
-  }, [increment]);
+  }, []);
 
   return (
     <>
