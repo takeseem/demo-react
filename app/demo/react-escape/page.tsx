@@ -8,6 +8,7 @@ import Chat, { Chat2, Counter, Dashboard, Stopwatch, Toggle } from "./Demo1";
 import CatFriends, { PageFocus, PageSearch, VideoPlayer } from "./DemoRefDom";
 import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
+import { ChatApp } from "./DemoEffectLife";
 
 export default function Page() {
   return (
@@ -110,6 +111,21 @@ export default function Page() {
 
           <p>第 4 个挑战 共 4 个挑战: 不用 Effect 提交表单</p>
           <FormSubmit4 />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>响应式 Effect 的生命周期</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/lifecycle-of-reactive-effects#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+
+          <p>第 1 个挑战 共 5 个挑战: 修复每次输入均重新连接</p>
+          <ChatApp />
         </div>
       </div>
     </main>
