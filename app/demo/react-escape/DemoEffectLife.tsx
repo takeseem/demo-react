@@ -58,15 +58,17 @@ function createConnection(serverUrl: string, roomId: string) {
 // 第 2 个挑战 共 5 个挑战: 打开和关闭状态同步 
 export function App2() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [canMove, setCanMove] = useState(true);
+  const [canMove, setCanMove] = useState(false);
 
   useEffect(() => {
+    if (!canMove) return;
+
     function handleMove(e: PointerEvent) {
       setPosition({ x: e.clientX, y: e.clientY });
     }
     window.addEventListener('pointermove', handleMove);
     return () => window.removeEventListener('pointermove', handleMove);
-  }, []);
+  }, [canMove]);
 
   return (
     <>
