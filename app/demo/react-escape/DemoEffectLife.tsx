@@ -215,3 +215,139 @@ function ChatRoom4({ roomId, createConnection }: {
 
   return <h1>欢迎来到 {roomId} 聊天室！</h1>;
 }
+
+// 第 5 个挑战 共 5 个挑战: 填充一系列选择框
+type Plant = {
+  id: string;
+  name: string;
+};
+
+export function EffectLifeApp5() {
+  const [planetList, setPlanetList] = useState<Plant[]>([])
+  const [planetId, setPlanetId] = useState('');
+
+  const [placeList, setPlaceList] = useState<Place[]>([]);
+  const [placeId, setPlaceId] = useState('');
+
+  useEffect(() => {
+    let ignore = false;
+    fetchData('/planets').then(result => {
+      if (!ignore) {
+        console.log('获取了一个行星列表。');
+        setPlanetList(result);
+        setPlanetId(result[0].id); // 选择第一个行星
+      }
+    });
+    return () => {
+      ignore = true;
+    }
+  }, []);
+
+  return (
+    <div style={{ display: "flex", gap: "0.5rem", flexDirection: "column", padding: "0.5rem", }}>
+      <label>
+        选择一个行星：{' '}
+        <select style={bgStyle} value={planetId} onChange={e => {
+          setPlanetId(e.target.value);
+        }}>
+          {planetList?.map(planet =>
+            <option key={planet.id} value={planet.id}>{planet.name}</option>
+          )}
+        </select>
+      </label>
+      <label>
+        选择一个地点：{' '}
+        <select style={bgStyle} value={placeId} onChange={e => {
+          setPlaceId(e.target.value);
+        }}>
+          {placeList?.map(place =>
+            <option key={place.id} value={place.id}>{place.name}</option>
+          )}
+        </select>
+      </label>
+      <hr style={{ width: "16rem", }} />
+      <p>你将要前往：{planetId || '...'} 的 {placeId || '...'} </p>
+    </div>
+  );
+}
+
+function fetchData(url: string) {
+  if (url === '/planets') {
+    return fetchPlanets();
+  } else if (url.startsWith('/planets/')) {
+    const match = url.match(/^\/planets\/([\w-]+)\/places(\/)?$/);
+    if (!match || !match[1] || !match[1].length) {
+      throw Error('预期的 URL，如“/planets/earth/places”。 已收到："' + url + '"。');
+    }
+    return fetchPlaces(match[1]);
+  } else throw Error('预期的 URL，如“/planets”或“/planets/earth/places”。已收到："' + url + '"。');
+}
+
+async function fetchPlanets() {
+  return new Promise<Plant[]>(resolve => {
+    setTimeout(() => {
+      resolve([{
+        id: 'earth',
+        name: '地球'
+      }, {
+        id: 'venus',
+        name: '金星'
+      }, {
+        id: 'mars',
+        name: '火星'        
+      }]);
+    }, 1000);
+  });
+}
+
+type Place = {
+  id: string;
+  name: string;
+};
+
+async function fetchPlaces(planetId: string) {
+  if (typeof planetId !== 'string') {
+    throw Error(
+      'fetchPlaces(planetId) 需要一个字符串参数。' +
+      '而是收到：' + planetId + '。'
+    );
+  }
+  return new Promise<Place[]>(resolve => {
+    setTimeout(() => {
+      if (planetId === 'earth') {
+        resolve([{
+          id: 'laos',
+          name: '老挝'
+        }, {
+          id: 'spain',
+          name: '西班牙'
+        }, {
+          id: 'vietnam',
+          name: '越南'        
+        }]);
+      } else if (planetId === 'venus') {
+        resolve([{
+          id: 'aurelia',
+          name: '奥雷利亚'
+        }, {
+          id: 'diana-chasma',
+          name: '戴安娜哈斯玛'
+        }, {
+          id: 'kumsong-vallis',
+          name: 'Kŭmsŏng山谷'        
+        }]);
+      } else if (planetId === 'mars') {
+        resolve([{
+          id: 'aluminum-city',
+          name: '铝城'
+        }, {
+          id: 'new-new-york',
+          name: '纽纽约'
+        }, {
+          id: 'vishniac',
+          name: '毗湿奴'
+        }]);
+      } else throw Error('未知的行星编号：' + planetId);
+    }, 1000);
+  });
+}
