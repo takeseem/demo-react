@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Todo = {
   id: number;
@@ -252,4 +252,52 @@ function ContactList({ contacts, selectedId, onSelect }: {
       </ul>
     </section>
   );
+}
+
+// 第 4 个挑战 共 4 个挑战: 不用 Effect 提交表单
+export function FormSubmit4() {
+  const [showForm, setShowForm] = useState(true);
+  const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (!showForm) {
+      sendMessage(message);
+    }
+  }, [showForm, message]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setShowForm(false);
+  }
+
+  if (!showForm) {
+    return (
+      <>
+        <h1>谢谢使用我们的服务！</h1>
+        <button onClick={() => {
+          setMessage('');
+          setShowForm(true);
+        }} style={btnStyle}>
+          打开聊天
+        </button>
+      </>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "0.5rem", alignItems: "flex-start", }}>
+      <textarea style={bgStyle}
+        placeholder="消息"
+        value={message}
+        onChange={e => setMessage(e.target.value)}
+      />
+      <button type="submit" disabled={message === ''} style={btnStyle}>
+        发送
+      </button>
+    </form>
+  );
+}
+
+function sendMessage(message: string) {
+  console.log('发送的消息：' + message);
 }
