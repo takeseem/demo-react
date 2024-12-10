@@ -229,6 +229,11 @@ export function EffectLifeApp5() {
   const [placeList, setPlaceList] = useState<Place[]>([]);
   const [placeId, setPlaceId] = useState('');
 
+  function setPlaces(places: Place[]) {
+    setPlaceList(places);
+    setPlaceId(places.length > 0 ? places[0].id : '');
+  }
+
   useEffect(() => {
     let ignore = false;
     fetchData('/planets').then(result => {
@@ -242,6 +247,25 @@ export function EffectLifeApp5() {
       ignore = true;
     }
   }, []);
+
+  useEffect(() => {
+    if (planetId === '') {
+      console.log(new Date().toISOString(), "没有选择行星: plantId==", planetId);
+      return;
+    }
+
+    setPlaces([]);
+    let ignore = false;
+    fetchPlaces(planetId).then(result => {
+      if (!ignore) {
+        console.log(new Date().toISOString(), '获取行星的地点');
+        setPlaces(result);
+      }
+    })
+    return () => {
+      ignore = true;
+    }
+  }, [planetId]);
 
   return (
     <div style={{ display: "flex", gap: "0.5rem", flexDirection: "column", padding: "0.5rem", }}>
