@@ -95,3 +95,46 @@ export function App2() {
     </>
   );
 }
+
+// 第 3 个挑战 共 5 个挑战: 寻找过时值的错误
+export function App3() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [canMove, setCanMove] = useState(true);
+
+  function handleMove(e: PointerEvent) {
+    if (canMove) {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('pointermove', handleMove);
+    return () => window.removeEventListener('pointermove', handleMove);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <label>
+        <input type="checkbox"
+          checked={canMove}
+          onChange={e => setCanMove(e.target.checked)} 
+        />
+        是否允许移动
+      </label>
+      <hr />
+      <div style={{
+        position: 'absolute',
+        backgroundColor: 'pink',
+        borderRadius: '50%',
+        opacity: 0.6,
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        pointerEvents: 'none',
+        left: -20,
+        top: -20,
+        width: 40,
+        height: 40,
+      }} />
+    </>
+  );
+}
