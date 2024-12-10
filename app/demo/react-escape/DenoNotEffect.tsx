@@ -1,5 +1,5 @@
 import { bgStyle, btnStyle } from "@/app/lib/definitions";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type Todo = {
   id: number;
@@ -126,5 +126,134 @@ export function TodoList2() {
         ))}
       </ul>
     </div>
+  );
+}
+
+// 第 3 个挑战 共 4 个挑战: 不用 Effect 重置 state
+type Contact = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+const initialContacts: Contact[] = [
+  { id: 0, name: 'Taylor', email: 'taylor@mail.com' },
+  { id: 1, name: 'Alice', email: 'alice@mail.com' },
+  { id: 2, name: 'Bob', email: 'bob@mail.com' }
+];
+export function ContactManager() {
+  const [
+    contacts,
+    setContacts
+  ] = useState(initialContacts);
+  const [
+    selectedId,
+    setSelectedId
+  ] = useState(0);
+  const selectedContact = contacts.find(c =>
+    c.id === selectedId
+  );
+
+  function handleSave(updatedData: Contact) {
+    const nextContacts = contacts.map(c => {
+      if (c.id === updatedData.id) {
+        return updatedData;
+      } else {
+        return c;
+      }
+    });
+    setContacts(nextContacts);
+  }
+
+  return (
+    <div>
+      <ContactList
+        contacts={contacts}
+        selectedId={selectedId}
+        onSelect={id => setSelectedId(id)}
+      />
+      <hr style={{ margin: "0.5rem 0", width: "18rem", }}/>
+      <EditContact
+        savedContact={selectedContact as Contact}
+        onSave={handleSave}
+      />
+    </div>
+  )
+}
+
+export function EditContact({ savedContact, onSave }: {
+  savedContact: Contact;
+  onSave: (updatedData: Contact) => void;
+}) {
+  const [name, setName] = useState(savedContact.name);
+  const [email, setEmail] = useState(savedContact.email);
+
+  useEffect(() => {
+    setName(savedContact.name);
+    setEmail(savedContact.email);
+  }, [savedContact]);
+
+  return (
+    <section style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "0.5rem", }}>
+      <label>
+        姓名：{' '}
+        <input style={bgStyle}
+          type="text"
+          value={name}
+          onChange={e => setName(e.target.value)}
+        />
+      </label>
+      <label>
+        邮箱：{' '}
+        <input style={bgStyle}
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+      </label>
+      <section>
+        <button onClick={() => {
+          const updatedData = {
+            id: savedContact.id,
+            name: name,
+            email: email
+          };
+          onSave(updatedData);
+        }} style={btnStyle}>
+          保存
+        </button>
+        <button onClick={() => {
+          setName(savedContact.name);
+          setEmail(savedContact.email);
+        }} style={btnStyle}>
+          重置
+        </button>
+      </section>
+    </section>
+  );
+}
+
+function ContactList({ contacts, selectedId, onSelect }: {
+  contacts: Contact[],
+  selectedId: number,
+  onSelect: (id: number) => void
+}) {
+  return (
+    <section>
+      <ul style={{ display: "flex", gap: "0.5rem", }}>
+        {contacts.map(contact =>
+          <li key={contact.id}>
+            <button onClick={() => {
+              onSelect(contact.id);
+            }} style={btnStyle}>
+              {contact.id === selectedId ?
+                <b>{contact.name}</b> :
+                contact.name
+              }
+            </button>
+          </li>
+        )}
+      </ul>
+    </section>
   );
 }
