@@ -159,11 +159,15 @@ export default function ChatRoomDepApp() {
   );
 }
 function ChatRoom({ options }: { options: ConnectionOptions }) {
+  const { serverUrl, roomId } = options;
   useEffect(() => {
-    const connection = createConnection(options);
+    const connection = createConnection({
+      serverUrl: serverUrl,
+      roomId: roomId,
+    });
     connection.connect();
     return () => connection.disconnect();
-  }, [options]);
+  }, [serverUrl, roomId]);
 
   return <h1>欢迎来到 {options.roomId} 房间！</h1>;
 }
