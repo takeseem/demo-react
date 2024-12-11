@@ -1,4 +1,4 @@
-import { btnStyle } from "@/app/lib/definitions";
+import { bgStyle, btnStyle } from "@/app/lib/definitions";
 import { useEffect, useRef, useState } from "react";
 
 export function TimerDep1() {
@@ -112,4 +112,79 @@ class FadeInAnimation {
     this.frameId = null;
     this.duration = 0;
   }
+}
+
+// 第 3 个挑战 共 4 个挑战: 修复聊天重新连接的问题
+export default function ChatRoomDepApp() {
+  const [isDark, setIsDark] = useState(true);
+  const [roomId, setRoomId] = useState('所有');
+  const [serverUrl, setServerUrl] = useState('https://localhost:1234');
+
+  const options = {
+    serverUrl: serverUrl,
+    roomId: roomId
+  };
+
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column",
+      gap: "0.5rem", padding: "0.5rem", alignItems: "flex-start",
+      backgroundColor: isDark ? '#222' : 'gray',
+      color: isDark ? '#eee' : 'black',
+    }}>
+      <button onClick={() => setIsDark(!isDark)} style={btnStyle}>
+        切换主题
+      </button>
+      <label>
+        服务器地址：
+        <input style={bgStyle}
+          value={serverUrl}
+          onChange={e => setServerUrl(e.target.value)}
+        />
+      </label>
+      <label>
+        选择聊天室：
+        <select style={bgStyle}
+          value={roomId}
+          onChange={e => setRoomId(e.target.value)}
+        >
+          <option value="所有">所有</option>
+          <option value="旅游">旅游</option>
+          <option value="音乐">音乐</option>
+        </select>
+      </label>
+      <hr />
+      <ChatRoom options={options} />
+    </div>
+  );
+}
+function ChatRoom({ options }: { options: ConnectionOptions }) {
+  useEffect(() => {
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]);
+
+  return <h1>欢迎来到 {options.roomId} 房间！</h1>;
+}
+type ConnectionOptions = {
+  serverUrl: string;
+  roomId: string;
+};
+function createConnection({ serverUrl, roomId }: ConnectionOptions) {
+  // 真正的实现实际上会连接到服务器
+  if (typeof serverUrl !== 'string') {
+    throw Error('期望 serverUrl 是字符串类型，收到：' + serverUrl);
+  }
+  if (typeof roomId !== 'string') {
+    throw Error('期望 roomId 是字符串类型，收到：' + roomId);
+  }
+  return {
+    connect() {
+      console.log('✅ 连接到“' + roomId + '”房间，在 ' + serverUrl + '...');
+    },
+    disconnect() {
+      console.log('❌ 断开“' + roomId + '”房间，在 ' + serverUrl);
+    }
+  };
 }
