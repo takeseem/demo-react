@@ -11,6 +11,7 @@ import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffec
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
 import ChatRoomDepApp, { ChatDepApp4, TimerDep1, WelcomeApp } from "./DemoEffectDep";
+import { CounterHookApp1 } from "./DemoHook";
 
 export default function Page() {
   return (
@@ -188,6 +189,30 @@ export default function Page() {
 
           <p>第 4 个挑战 共 4 个挑战: 再次修复聊天重新连接的问题</p>
           <ChatDepApp4 />
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>使用自定义 Hook 复用逻辑</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/removing-effect-dependencies#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+
+          <p>第 1 个挑战 共 5 个挑战: 提取 useCounter Hook</p>
+          <CounterHookApp1 />
+
+          <p>第 2 个挑战 共 5 个挑战: 让计时器的 delay 变为可配置项</p>
+
+          <p>第 3 个挑战 共 5 个挑战: 从 useCounter 中提取 useInterval</p>
+
+          <p>第 4 个挑战 共 5 个挑战: 修复计时器重置</p>
+
+          <p>第 5 个挑战 共 5 个挑战: 实现交错运动</p>
+
         </div>
       </div>
     </main>
