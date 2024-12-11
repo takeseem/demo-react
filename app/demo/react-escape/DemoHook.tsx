@@ -16,3 +16,26 @@ function useCounter(initCount = 0) {
   }, [initCount]);
   return count;
 }
+
+// 第 2 个挑战 共 5 个挑战: 让计时器的 delay 变为可配置项
+export function CounterHookApp2() {
+  const [delay, setDelay] = useState(1000);
+  const count = useCounter();
+  return (
+    <>
+      <label>
+        Tick duration: {delay} ms
+        <br />
+        <input
+          type="range"
+          value={delay}
+          min="10"
+          max="2000"
+          onChange={e => setDelay(Number(e.target.value))}
+        />
+      </label>
+      <hr />
+      <h1>Ticks: {count}</h1>
+    </>
+  );
+}
