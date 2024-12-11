@@ -234,32 +234,33 @@ export function ChatDepApp4() {
         onMessage={msg => {
           showNotification('新消息：' + msg, isDark ? 'dark' : 'light');
         }}
-        createConnection={() => {
-          const options = {
-            serverUrl: 'https://localhost:1234',
-            roomId: roomId
-          };
-          if (isEncrypted) {
-            return createEncryptedConnection(options);
-          } else {
-            return createUnencryptedConnection(options);
-          }
-        }}
+        isEncrypted={isEncrypted}
       />
     </div>
   );
 }
-function ChatRoom4({ roomId, createConnection, onMessage }: {
+function ChatRoom4({ roomId, isEncrypted, onMessage }: {
   roomId: string;
-  createConnection: () => Connection;
+  isEncrypted: boolean;
   onMessage: (msg: string) => void;
 }) {
+  const onMsgRef = useRef(onMessage);
   useEffect(() => {
-    const connection = createConnection();
-    connection.on('message', (msg: string) => onMessage(msg));
+    onMsgRef.current = onMessage
+  }, [onMessage]);
+
+  useEffect(() => {
+    const conFun = isEncrypted ? createEncryptedConnection : createUnencryptedConnection;
+    const connection = conFun({
+      serverUrl: 'https://localhost:1234',
+      roomId: roomId
+    });
+    connection.on('message', (msg) => {
+      onMsgRef.current(msg);
+    });
     connection.connect();
     return () => connection.disconnect();
-  }, [createConnection]);
+  }, [roomId, isEncrypted]);
 
   return <h1>欢迎来到 {roomId} 房间！</h1>;
 }
