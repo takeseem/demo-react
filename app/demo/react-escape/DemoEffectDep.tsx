@@ -7,13 +7,13 @@ export function TimerDep1() {
     console.log('✅ 创建定时器');
     const id = setInterval(() => {
       console.log('⏰ Interval');
-      setCount(count + 1);
+      setCount(v => v + 1);
     }, 1000);
     return () => {
       console.log('❌ 清除定时器');
       clearInterval(id);
     };
-  }, [count]);
+  }, []);
 
   return <h1>计数器: {count}</h1>
 }
