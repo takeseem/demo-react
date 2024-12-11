@@ -259,7 +259,7 @@ function ChatRoom4({ roomId, createConnection, onMessage }: {
     connection.on('message', (msg: string) => onMessage(msg));
     connection.connect();
     return () => connection.disconnect();
-  }, [createConnection, onMessage]);
+  }, [createConnection]);
 
   return <h1>欢迎来到 {roomId} 房间！</h1>;
 }
