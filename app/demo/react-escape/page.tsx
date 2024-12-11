@@ -10,7 +10,7 @@ import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
-import ChatRoomDepApp, { TimerDep1, WelcomeApp } from "./DemoEffectDep";
+import ChatRoomDepApp, { ChatDepApp4, TimerDep1, WelcomeApp } from "./DemoEffectDep";
 
 export default function Page() {
   return (
@@ -185,6 +185,9 @@ export default function Page() {
 
           <p>第 3 个挑战 共 4 个挑战: 修复聊天重新连接的问题</p>
           <ChatRoomDepApp />
+
+          <p>第 4 个挑战 共 4 个挑战: 再次修复聊天重新连接的问题</p>
+          <ChatDepApp4 />
         </div>
       </div>
     </main>

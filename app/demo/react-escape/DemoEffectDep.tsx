@@ -192,3 +192,171 @@ function createConnection({ serverUrl, roomId }: ConnectionOptions) {
     }
   };
 }
+
+// 第 4 个挑战 共 4 个挑战: 再次修复聊天重新连接的问题
+export function ChatDepApp4() {
+  const [isDark, setIsDark] = useState(false);
+  const [roomId, setRoomId] = useState('所有');
+  const [isEncrypted, setIsEncrypted] = useState(false);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", padding: "0.5rem", alignItems: "flex-start", }}>
+      <label>
+        <input
+          type="checkbox"
+          checked={isDark}
+          onChange={e => setIsDark(e.target.checked)}
+        />
+        使用暗黑主题
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          checked={isEncrypted}
+          onChange={e => setIsEncrypted(e.target.checked)}
+        />
+        开启加密功能
+      </label>
+      <label>
+        选择聊天室：
+        <select style={bgStyle}
+          value={roomId}
+          onChange={e => setRoomId(e.target.value)}
+        >
+          <option value="所有">所有</option>
+          <option value="旅游">旅游</option>
+          <option value="音乐">音乐</option>
+        </select>
+      </label>
+      <hr style={{ width: "16rem", }}/>
+      <ChatRoom4
+        roomId={roomId}
+        onMessage={msg => {
+          showNotification('新消息：' + msg, isDark ? 'dark' : 'light');
+        }}
+        createConnection={() => {
+          const options = {
+            serverUrl: 'https://localhost:1234',
+            roomId: roomId
+          };
+          if (isEncrypted) {
+            return createEncryptedConnection(options);
+          } else {
+            return createUnencryptedConnection(options);
+          }
+        }}
+      />
+    </div>
+  );
+}
+function ChatRoom4({ roomId, createConnection, onMessage }: {
+  roomId: string;
+  createConnection: () => Connection;
+  onMessage: (msg: string) => void;
+}) {
+  useEffect(() => {
+    const connection = createConnection();
+    connection.on('message', (msg: string) => onMessage(msg));
+    connection.connect();
+    return () => connection.disconnect();
+  }, [createConnection, onMessage]);
+
+  return <h1>欢迎来到 {roomId} 房间！</h1>;
+}
+function showNotification(message: string, theme: string) {
+  console.log(new Date().toISOString(), `主题：${theme}，消息：${message}`);
+}
+
+type Connection = {
+  on(event: string, callback: (msg: string) => void): void;
+  connect(): void;
+  disconnect(): void;
+};
+
+export function createEncryptedConnection({ serverUrl, roomId }: {
+  serverUrl: string;
+  roomId: string;
+}): Connection {
+  // 真正的实现实际上会连接到服务器
+  if (typeof serverUrl !== 'string') {
+    throw Error('期望 serverUrl 是字符串类型，收到：' + serverUrl);
+  }
+  if (typeof roomId !== 'string') {
+    throw Error('期望 roomId 是字符串类型，收到：' + roomId);
+  }
+  let intervalId: NodeJS.Timeout;
+  let messageCallback: ((msg: string) => void) | null;
+  return {
+    connect() {
+      console.log('✅ 🔐 连接到“' + roomId + '”房间...（已加密）');
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (messageCallback) {
+          if (Math.random() > 0.5) {
+            messageCallback('hey')
+          } else {
+            messageCallback('lol');
+          }
+        }
+      }, 3000);
+    },
+    disconnect() {
+      clearInterval(intervalId);
+      messageCallback = null;
+      console.log('❌ 🔐 断开“' + roomId + '”房间（已加密）');
+    },
+    on(event, callback) {
+      if (messageCallback) {
+        throw Error('不能添加 handler 2次');
+      }
+      if (event !== 'message') {
+        throw Error('仅支持 "message" 事件');
+      }
+      messageCallback = callback;
+    },
+  };
+}
+
+function createUnencryptedConnection({ serverUrl, roomId }: {
+  serverUrl: string;
+  roomId: string;
+}): Connection {
+  // 真正的实现实际上会连接到服务器
+  if (typeof serverUrl !== 'string') {
+    throw Error('期望 serverUrl 是字符串类型，收到：' + serverUrl);
+  }
+  if (typeof roomId !== 'string') {
+    throw Error('期望 roomId 是字符串类型，收到：' + roomId);
+  }
+  let intervalId: NodeJS.Timeout;
+  let messageCallback: ((msg: string) => void) | null;
+  return {
+    connect() {
+      console.log('✅ 连接到“' + roomId + '”房间（未加密）...');
+      clearInterval(intervalId);
+      intervalId = setInterval(() => {
+        if (messageCallback) {
+          if (Math.random() > 0.5) {
+            messageCallback('hey')
+          } else {
+            messageCallback('lol');
+          }
+        }
+      }, 3000);
+    },
+    disconnect() {
+      clearInterval(intervalId);
+      messageCallback = null;
+      console.log('❌ 断开“' + roomId + '”房间（未加密）');
+    },
+    on(event, callback) {
+      if (messageCallback) {
+        throw Error('不能添加 handler 2次');
+      }
+      if (event !== 'message') {
+        throw Error('仅支持 "message" 事件');
+      }
+      messageCallback = callback;
+    },
+  };
+}
