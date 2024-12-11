@@ -29,7 +29,7 @@ function Welcome({ duration }: { duration: number }) {
     return () => {
       animation.stop();
     };
-  }, [duration]);
+  }, []);
 
   return (
     <h1
