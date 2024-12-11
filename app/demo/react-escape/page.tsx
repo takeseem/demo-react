@@ -10,6 +10,7 @@ import { Form, Form2, Form3, Page4 } from "./DemoUseEffect";
 import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffect";
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
+import { TimerDep1 } from "./DemoEffectDep";
 
 export default function Page() {
   return (
@@ -163,6 +164,21 @@ export default function Page() {
 
           <p>第 4 个挑战 共 4 个挑战: 修复延迟通知</p>
           
+        </div>
+      </div>
+
+      <div>
+        <hr style={{ margin: "1rem 0", }} />
+        <div>
+          <h1 style={h1Style}>移除 Effect 依赖项</h1>
+          <p>
+            <a target="_blank" href="https://zh-hans.react.dev/learn/removing-effect-dependencies#challenges">
+              尝试一些挑战
+            </a>
+          </p>
+
+          <p>第 1 个挑战 共 4 个挑战: 修复重置 interval</p>
+          <TimerDep1 />
         </div>
       </div>
     </main>
