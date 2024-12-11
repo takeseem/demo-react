@@ -11,7 +11,7 @@ import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffec
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
 import ChatRoomDepApp, { ChatDepApp4, TimerDep1, WelcomeApp } from "./DemoEffectDep";
-import { CounterHookApp1 } from "./DemoHook";
+import { CounterHookApp1, CounterHookApp2 } from "./DemoHook";
 
 export default function Page() {
   return (
@@ -206,6 +206,7 @@ export default function Page() {
           <CounterHookApp1 />
 
           <p>第 2 个挑战 共 5 个挑战: 让计时器的 delay 变为可配置项</p>
+          <CounterHookApp2 />
 
           <p>第 3 个挑战 共 5 个挑战: 从 useCounter 中提取 useInterval</p>
 

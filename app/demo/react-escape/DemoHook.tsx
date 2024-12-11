@@ -6,21 +6,26 @@ export function CounterHookApp1() {
   return <h1>Seconds passed: {count}</h1>;
 }
 
-function useCounter(initCount = 0) {
+function useCounter({ initCount = 0, delay = 1000 } = {}) {
+  // console.log(new Date().toISOString(), `useCounter initCount=${initCount}, delay=${delay}`);
   const [count, setCount] = useState(initCount);
   useEffect(() => {
     const id = setInterval(() => {
       setCount(c => c + 1);
-    }, 1000);
-    return () => clearInterval(id);
-  }, [initCount]);
+    }, delay);
+    console.log(new Date().toISOString(), `useCounter useEffect, delay=${delay}, intervalId=${id}`);
+    return () => {
+      console.log(new Date().toISOString(), `useCounter clearEffect, intervalId=${id}`);
+      clearInterval(id);
+    }
+  }, [delay]);
   return count;
 }
 
 // 第 2 个挑战 共 5 个挑战: 让计时器的 delay 变为可配置项
 export function CounterHookApp2() {
   const [delay, setDelay] = useState(1000);
-  const count = useCounter();
+  const count = useCounter({ delay });
   return (
     <>
       <label>
