@@ -92,8 +92,13 @@ function useCounter4(delay: number) {
 
 // 第 5 个挑战 共 5 个挑战: 实现交错运动 
 function useDelayedValue(value: { x: number, y: number }, delay: number) {
-  // TODO: 实现这个 Hook
-  return value;
+  const [ret, setRet] = useState(value);
+  useEffect(() => {
+    setTimeout(() => {
+      setRet(value);
+    }, delay);
+  }, [value, delay]);
+  return ret;
 }
 
 export function CanvasHookApp5() {
