@@ -53,14 +53,17 @@ export function CounterHookApp3() {
 }
 function useCounter3(delay: number) {
   const [count, setCount] = useState(0);
+  useInterval(() => {
+    setCount(c => c + 1);
+  }, delay);
+  return count;
+}
+function useInterval(callback: () => void, delay: number) {
   useEffect(() => {
-    const id = setInterval(() => {
-      setCount(c => c + 1);
-    }, delay);
+    const id = setInterval(callback, delay);
     return () => {
-      console.log(new Date().toISOString(), `useCounter3 useEffect, delay=${delay}, intervalId=${id}`);
+      console.log(new Date().toISOString(), `useInterval clear effect, delay=${delay}, intervalId=${id}`);
       clearInterval(id);
     }
-  }, [delay]);
-  return count;
+  }, [callback, delay]);
 }
