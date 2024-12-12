@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { callbackify } from "util";
 
 // 第 1 个挑战 共 5 个挑战: 提取 useCounter Hook
 export function CounterHookApp1() {
@@ -89,4 +88,58 @@ function useCounter4(delay: number) {
     setCount(c => c + 1);
   }, delay);
   return count;
+}
+
+// 第 5 个挑战 共 5 个挑战: 实现交错运动 
+function useDelayedValue(value: { x: number, y: number }, delay: number) {
+  // TODO: 实现这个 Hook
+  return value;
+}
+
+export function CanvasHookApp5() {
+  const pos1 = usePointerPosition();
+  const pos2 = useDelayedValue(pos1, 100);
+  const pos3 = useDelayedValue(pos2, 200);
+  const pos4 = useDelayedValue(pos3, 100);
+  const pos5 = useDelayedValue(pos3, 50);
+  return (
+    <div>
+      <Dot position={pos1} opacity={1} />
+      <Dot position={pos2} opacity={0.8} />
+      <Dot position={pos3} opacity={0.6} />
+      <Dot position={pos4} opacity={0.4} />
+      <Dot position={pos5} opacity={0.2} />
+    </div>
+  );
+}
+
+function Dot({ position, opacity }: {
+  position: { x: number, y: number };
+  opacity: number;
+}) {
+  return (
+    <div style={{
+      position: 'absolute',
+      backgroundColor: 'pink',
+      borderRadius: '50%',
+      opacity,
+      transform: `translate(${position.x}px, ${position.y}px)`,
+      pointerEvents: 'none',
+      left: -20,
+      top: -20,
+      width: 40,
+      height: 40,
+    }} />
+  );
+}
+export function usePointerPosition() {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  useEffect(() => {
+    function handleMove(e: PointerEvent) {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }
+    window.addEventListener('pointermove', handleMove);
+    return () => window.removeEventListener('pointermove', handleMove);
+  }, []);
+  return position;
 }

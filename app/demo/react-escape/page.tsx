@@ -11,7 +11,7 @@ import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffec
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
 import ChatRoomDepApp, { ChatDepApp4, TimerDep1, WelcomeApp } from "./DemoEffectDep";
-import { CounterHookApp1, CounterHookApp2, CounterHookApp3, CounterHookApp4 } from "./DemoHook";
+import { CanvasHookApp5, CounterHookApp1, CounterHookApp2, CounterHookApp3, CounterHookApp4 } from "./DemoHook";
 
 export default function Page() {
   return (
@@ -215,7 +215,7 @@ export default function Page() {
           <CounterHookApp4 />
 
           <p>第 5 个挑战 共 5 个挑战: 实现交错运动</p>
-
+          <CanvasHookApp5 />
         </div>
       </div>
     </main>
