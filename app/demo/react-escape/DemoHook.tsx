@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { callbackify } from "util";
 
 // 第 1 个挑战 共 5 个挑战: 提取 useCounter Hook
 export function CounterHookApp1() {
@@ -43,4 +44,23 @@ export function CounterHookApp2() {
       <h1>Ticks: {count}</h1>
     </>
   );
+}
+
+// 第 3 个挑战 共 5 个挑战: 从 useCounter 中提取 useInterval 
+export function CounterHookApp3() {
+  const count = useCounter3(1000);
+  return <h1>Seconds passed: {count}</h1>;
+}
+function useCounter3(delay: number) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setCount(c => c + 1);
+    }, delay);
+    return () => {
+      console.log(new Date().toISOString(), `useCounter3 useEffect, delay=${delay}, intervalId=${id}`);
+      clearInterval(id);
+    }
+  }, [delay]);
+  return count;
 }

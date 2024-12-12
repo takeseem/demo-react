@@ -11,7 +11,7 @@ import { ContactManager, FormSubmit4, TodoList, TodoList2 } from "./DenoNotEffec
 import { App2, App3, ChatApp, ChatApp4, EffectLifeApp5 } from "./DemoEffectLife";
 import { TimerApp1, TimerApp2, TimerApp3 } from "./DemoEffectEvent";
 import ChatRoomDepApp, { ChatDepApp4, TimerDep1, WelcomeApp } from "./DemoEffectDep";
-import { CounterHookApp1, CounterHookApp2 } from "./DemoHook";
+import { CounterHookApp1, CounterHookApp2, CounterHookApp3 } from "./DemoHook";
 
 export default function Page() {
   return (
@@ -209,6 +209,7 @@ export default function Page() {
           <CounterHookApp2 />
 
           <p>第 3 个挑战 共 5 个挑战: 从 useCounter 中提取 useInterval</p>
+          <CounterHookApp3 />
 
           <p>第 4 个挑战 共 5 个挑战: 修复计时器重置</p>
 
